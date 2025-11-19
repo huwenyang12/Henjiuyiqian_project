@@ -13,10 +13,14 @@ def safe_input(locator, text, timeout=3, retry=3, sleep=1):
         elem = cc.wait_appear(locator, wait_timeout=timeout)
         if elem:
             try:
-                elem.set_text("") 
-                time.sleep(0.3)
-                elem.set_text(text)
-                time.sleep(0.3)
+                elem.click()
+                time.sleep(0.2)
+                elem.send_hotkey("^a")
+                time.sleep(0.1)
+                elem.send_hotkey("{DEL}")
+                time.sleep(0.1)
+                cc.send_text(text)
+                time.sleep(0.2)
                 return True
             except:
                 print(f"[safe_input] 第 {attempt}/{retry} 次输入失败：{locator}")

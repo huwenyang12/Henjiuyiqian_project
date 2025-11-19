@@ -58,13 +58,21 @@ class Browser:
     # ==================== 执行查询序时账 ==================== 
     def run_query(self):
         try:
-            print("正在执行序时帐查询操作...")
+            print("正在筛选账簿列表...")
             safe_click(locator.query.button_查询)
             safe_click(locator.query.账簿勾选)
+            time.sleep(1)
             cc.find_element(locator.query.tab_我的收藏).double_click()
             time.sleep(2)
             safe_click(locator.query.button_全部选择)
             safe_click(locator.query.button_确定)
+
+            print("正在填写查找日期...")
+            safe_input(locator.query.input_开始日期, "2025-11-19")
+            safe_input(locator.query.input_结束日期, "2025-12-19")
+            time.sleep(1)
+            cc.send_hotkey("{ENTER}")
+
         except Exception as e:
             print(f"查询序时账失败：{e}")
             raise

@@ -1,130 +1,7 @@
 {
 	"id": "be705e0d-4622-4cfd-8b56-6478b0ed3dc9",
 	"name": "query",
-	"nodes": [
-		{
-			"id": "62c77e3b-2a27-492a-90a7-158c24484499",
-			"name": "c1",
-			"nodes": [],
-			"locators": [
-				{
-					"id": "ab8b09bb-7000-4522-9300-9a632a4244db",
-					"name": "button_wui_button_tagbtn_add_wui_button_sm",
-					"filePath": "56a8dcc7-4d05-4a0d-86a8-c9db3e8025a8.jpg",
-					"content": {
-						"automationType": "Chrome",
-						"processName": {
-							"value": "chrome"
-						},
-						"filePath": {
-							"value": "chrome.exe"
-						},
-						"version": {
-							"value": "1.3"
-						},
-						"childControls": [
-							{
-								"identifier": {
-									"role": {
-										"value": "window"
-									},
-									"title": {
-										"value": "北京很久以前餐饮管理有限公司"
-									},
-									"url": {
-										"value": "https://c1.yonyoucloud.com/",
-										"excluded": true
-									},
-									"className": {
-										"value": "Chrome_WidgetWin_1"
-									},
-									"controlMetaType": "Tab"
-								},
-								"childControls": [
-									{
-										"identifier": {
-											"tag": {
-												"value": "BUTTON"
-											},
-											"class": {
-												"value": "wui-button tagBtn-add wui-button-sm",
-												"excluded": true
-											},
-											"type": {
-												"value": "button",
-												"excluded": false
-											},
-											"ancestorId": {
-												"value": "fha60wcg",
-												"excluded": true
-											},
-											"ancestorClass": {
-												"value": "referTaglist--e3761 referTagBox",
-												"excluded": true
-											},
-											"isLeaf": {
-												"value": "0",
-												"excluded": false
-											},
-											"cssSelector": {
-												"value": "body>div>div>div>div>div>div>div>div>div>div>div>section>section>main>div>div>div>div>div>div>div>div>div>div>div>div>div>div>div>div>div>div>div>div>div>div>div>button",
-												"excluded": true
-											},
-											"tableRow": {
-												"value": "-1",
-												"excluded": false
-											},
-											"tableCol": {
-												"value": "-1",
-												"excluded": false
-											},
-											"controlMetaType": "Web",
-											"index": {
-												"value": "1",
-												"excluded": false
-											},
-											"locale": {
-												"isCustom": true,
-												"value": "zh_CN",
-												"operator": "equals",
-												"excluded": true
-											},
-											"layout": {
-												"isCustom": true,
-												"value": "horizontal",
-												"operator": "equals",
-												"excluded": true
-											},
-											"dir": {
-												"isCustom": true,
-												"value": "ltr",
-												"operator": "equals",
-												"excluded": true
-											},
-											"fieldid": {
-												"isCustom": true,
-												"value": "134d8980-86c7-43e9-827d-ac473ab9c9ec-simple-filter-reference_mdf_canzhaoicon",
-												"operator": "equals",
-												"excluded": true
-											}
-										},
-										"childControls": [],
-										"excluded": false
-									}
-								],
-								"excluded": false
-							}
-						],
-						"parameters": {
-							"excluded": true,
-							"operator": "equals",
-							"value": ""
-						}
-					}
-				}
-			]
-		}
-	],
+	"nodes": [],
 	"locators": [
 		{
 			"id": "c68b1154-68d1-47db-a020-382e7d9b4f92",
@@ -1004,6 +881,468 @@
 									"xPath": {
 										"excluded": false,
 										"value": "//button[contains(@class, 'tagBtn-add')]"
+									}
+								},
+								"childControls": [],
+								"excluded": false
+							}
+						],
+						"excluded": false
+					}
+				],
+				"parameters": {
+					"excluded": true,
+					"operator": "equals",
+					"value": ""
+				}
+			}
+		},
+		{
+			"id": "13af2795-03df-48ac-9dfe-b39f88684712",
+			"name": "input_开始日期",
+			"filePath": "1ff04e3a-3d5c-4da6-9487-ae0d36fd32ab.jpg",
+			"content": {
+				"automationType": "Chrome",
+				"processName": {
+					"value": "chrome"
+				},
+				"filePath": {
+					"value": "chrome.exe"
+				},
+				"version": {
+					"value": "1.3"
+				},
+				"childControls": [
+					{
+						"identifier": {
+							"role": {
+								"value": "window"
+							},
+							"title": {
+								"value": "北京很久以前餐饮管理有限公司"
+							},
+							"url": {
+								"value": "https://c1.yonyoucloud.com/",
+								"excluded": true
+							},
+							"className": {
+								"value": "Chrome_WidgetWin_1"
+							},
+							"controlMetaType": "Tab"
+						},
+						"childControls": [
+							{
+								"identifier": {
+									"tag": {
+										"value": "INPUT",
+										"excluded": true
+									},
+									"ancestorId": {
+										"value": "f863b523-7690-4cfc-9f37-c0e926c05ce4",
+										"excluded": true
+									},
+									"ancestorClass": {
+										"value": "wui-picker-input wui-picker-input-active",
+										"excluded": true
+									},
+									"isLeaf": {
+										"value": "1",
+										"excluded": true
+									},
+									"cssSelector": {
+										"value": "body>div>div>div>div>div>div>div>div>div>div>div>section>section>main>div>div>div>div>div>div>div>div>div>div>div>div>div>div>div>div>div>input",
+										"excluded": true
+									},
+									"tableRow": {
+										"value": "-1",
+										"excluded": true
+									},
+									"tableCol": {
+										"value": "-1",
+										"excluded": true
+									},
+									"controlMetaType": "Web",
+									"index": {
+										"value": "2",
+										"excluded": false
+									},
+									"fieldid": {
+										"isCustom": true,
+										"value": "3a04c007-65fd-40df-8644-582777a43cc8-date-picker_input_start_input",
+										"operator": "equals",
+										"excluded": true
+									},
+									"readonly": {
+										"isCustom": true,
+										"value": "readonly",
+										"operator": "equals",
+										"excluded": true
+									},
+									"placeholder": {
+										"isCustom": true,
+										"value": "开始日期",
+										"operator": "equals",
+										"excluded": true
+									},
+									"size": {
+										"isCustom": true,
+										"value": "12",
+										"operator": "equals",
+										"excluded": false
+									},
+									"autocomplete": {
+										"isCustom": true,
+										"value": "off",
+										"operator": "equals",
+										"excluded": true
+									},
+									"xPath": {
+										"excluded": false,
+										"value": "//input[@placeholder='开始日期']"
+									}
+								},
+								"childControls": [],
+								"excluded": false
+							}
+						],
+						"excluded": false
+					}
+				],
+				"parameters": {
+					"excluded": true,
+					"operator": "equals",
+					"value": ""
+				}
+			}
+		},
+		{
+			"id": "4929bd8b-c2f8-4965-832d-b60ec7622f53",
+			"name": "input_结束日期",
+			"filePath": "45ab0cd1-6916-40b8-b377-a3ba62867d35.jpg",
+			"content": {
+				"automationType": "Chrome",
+				"processName": {
+					"value": "chrome"
+				},
+				"filePath": {
+					"value": "chrome.exe"
+				},
+				"version": {
+					"value": "1.3"
+				},
+				"childControls": [
+					{
+						"identifier": {
+							"role": {
+								"value": "window"
+							},
+							"title": {
+								"value": "北京很久以前餐饮管理有限公司"
+							},
+							"url": {
+								"value": "https://c1.yonyoucloud.com/",
+								"excluded": true
+							},
+							"className": {
+								"value": "Chrome_WidgetWin_1"
+							},
+							"controlMetaType": "Tab"
+						},
+						"childControls": [
+							{
+								"identifier": {
+									"tag": {
+										"value": "INPUT",
+										"excluded": true
+									},
+									"ancestorId": {
+										"value": "f863b523-7690-4cfc-9f37-c0e926c05ce4",
+										"excluded": true
+									},
+									"ancestorClass": {
+										"value": "wui-picker-input",
+										"excluded": true
+									},
+									"isLeaf": {
+										"value": "1",
+										"excluded": true
+									},
+									"cssSelector": {
+										"value": "body>div>div>div>div>div>div>div>div>div>div>div>section>section>main>div>div>div>div>div>div>div>div>div>div>div>div>div>div>div>div>div>input",
+										"excluded": true
+									},
+									"tableRow": {
+										"value": "-1",
+										"excluded": true
+									},
+									"tableCol": {
+										"value": "-1",
+										"excluded": true
+									},
+									"controlMetaType": "Web",
+									"index": {
+										"value": "2",
+										"excluded": false
+									},
+									"fieldid": {
+										"isCustom": true,
+										"value": "3a04c007-65fd-40df-8644-582777a43cc8-date-picker_input_end_input",
+										"operator": "equals",
+										"excluded": true
+									},
+									"readonly": {
+										"isCustom": true,
+										"value": "readonly",
+										"operator": "equals",
+										"excluded": true
+									},
+									"placeholder": {
+										"isCustom": true,
+										"value": "结束日期",
+										"operator": "equals",
+										"excluded": true
+									},
+									"size": {
+										"isCustom": true,
+										"value": "12",
+										"operator": "equals",
+										"excluded": true
+									},
+									"autocomplete": {
+										"isCustom": true,
+										"value": "off",
+										"operator": "equals",
+										"excluded": true
+									},
+									"xPath": {
+										"excluded": false,
+										"value": "//input[@placeholder='结束日期']"
+									}
+								},
+								"childControls": [],
+								"excluded": false
+							}
+						],
+						"excluded": false
+					}
+				],
+				"parameters": {
+					"excluded": true,
+					"operator": "equals",
+					"value": ""
+				}
+			}
+		},
+		{
+			"id": "f11eb210-e8b3-4c06-a25c-c85fd305d750",
+			"name": "锚点_基本选项",
+			"filePath": "8c9ff981-e781-427f-8d5d-cfdafaccffa1.jpg",
+			"content": {
+				"automationType": "Chrome",
+				"processName": {
+					"value": "chrome"
+				},
+				"filePath": {
+					"value": "chrome.exe"
+				},
+				"version": {
+					"value": "1.3"
+				},
+				"childControls": [
+					{
+						"identifier": {
+							"role": {
+								"value": "window"
+							},
+							"title": {
+								"value": "北京很久以前餐饮管理有限公司"
+							},
+							"url": {
+								"value": "https://c1.yonyoucloud.com/",
+								"excluded": true
+							},
+							"className": {
+								"value": "Chrome_WidgetWin_1"
+							},
+							"controlMetaType": "Tab"
+						},
+						"childControls": [
+							{
+								"identifier": {
+									"tag": {
+										"value": "DIV",
+										"excluded": true
+									},
+									"ancestorId": {
+										"value": "f863b523-7690-4cfc-9f37-c0e926c05ce4",
+										"excluded": true
+									},
+									"ancestorClass": {
+										"value": "gap-line",
+										"excluded": true
+									},
+									"isLeaf": {
+										"value": "1",
+										"excluded": true
+									},
+									"cssSelector": {
+										"value": "body>div>div>div>div>div>div>div>div>div>div>div>section>section>main>div>div>div>div>div>div>div>div>div>div>div>div",
+										"excluded": true
+									},
+									"sInfo": {
+										"value": "基本选项",
+										"excluded": true
+									},
+									"tableRow": {
+										"value": "-1",
+										"excluded": true
+									},
+									"tableCol": {
+										"value": "-1",
+										"excluded": true
+									},
+									"controlMetaType": "Web",
+									"index": {
+										"value": "1",
+										"excluded": true
+									},
+									"xPath": {
+										"excluded": false,
+										"value": "//div[@class='gap-line']//div[text()='基本选项']"
+									}
+								},
+								"childControls": [],
+								"excluded": false
+							}
+						],
+						"excluded": false
+					}
+				],
+				"parameters": {
+					"excluded": true,
+					"operator": "equals",
+					"value": ""
+				}
+			}
+		},
+		{
+			"id": "c4af5987-7118-48d1-8175-e703e463984e",
+			"name": "锚点_今天",
+			"filePath": "83dc4bcc-11b7-4e23-8d43-820ac5f68d4d.jpg",
+			"content": {
+				"automationType": "Chrome",
+				"processName": {
+					"value": "chrome"
+				},
+				"filePath": {
+					"value": "chrome.exe"
+				},
+				"version": {
+					"value": "1.3"
+				},
+				"childControls": [
+					{
+						"identifier": {
+							"role": {
+								"value": "window"
+							},
+							"title": {
+								"value": "北京很久以前餐饮管理有限公司"
+							},
+							"url": {
+								"value": "https://c1.yonyoucloud.com/",
+								"excluded": true
+							},
+							"className": {
+								"value": "Chrome_WidgetWin_1"
+							},
+							"controlMetaType": "Tab"
+						},
+						"childControls": [
+							{
+								"identifier": {
+									"tag": {
+										"value": "BUTTON",
+										"excluded": true
+									},
+									"class": {
+										"value": "wui-button",
+										"excluded": true
+									},
+									"type": {
+										"value": "button",
+										"excluded": true
+									},
+									"ancestorId": {
+										"value": "f863b523-7690-4cfc-9f37-c0e926c05ce4",
+										"excluded": true
+									},
+									"ancestorClass": {
+										"value": "wui-button-group shortcutDate",
+										"excluded": true
+									},
+									"isLeaf": {
+										"value": "0",
+										"excluded": true
+									},
+									"cssSelector": {
+										"value": "body>div>div>div>div>div>div>div>div>div>div>div>section>section>main>div>div>div>div>div>div>div>div>div>div>div>div>div>div>div>div>button",
+										"excluded": true
+									},
+									"sInfo": {
+										"value": "今天",
+										"excluded": true
+									},
+									"tableRow": {
+										"value": "-1",
+										"excluded": true
+									},
+									"tableCol": {
+										"value": "-1",
+										"excluded": true
+									},
+									"title": {
+										"value": "今天",
+										"excluded": true
+									},
+									"controlMetaType": "Web",
+									"index": {
+										"value": "3",
+										"excluded": false
+									},
+									"locale": {
+										"isCustom": true,
+										"value": "zh_CN",
+										"operator": "equals",
+										"excluded": true
+									},
+									"layout": {
+										"isCustom": true,
+										"value": "horizontal",
+										"operator": "equals",
+										"excluded": true
+									},
+									"dir": {
+										"isCustom": true,
+										"value": "ltr",
+										"operator": "equals",
+										"excluded": true
+									},
+									"fieldid": {
+										"isCustom": true,
+										"value": "3a04c007-65fd-40df-8644-582777a43cc8-0selectControl_btn",
+										"operator": "equals",
+										"excluded": true
+									},
+									"style": {
+										"isCustom": true,
+										"value": "z-index: 1;",
+										"operator": "equals",
+										"excluded": true
+									},
+									"xPath": {
+										"excluded": false,
+										"value": "//button//span[text()='今天']"
 									}
 								},
 								"childControls": [],
