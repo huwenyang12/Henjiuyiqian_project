@@ -1,24 +1,20 @@
 # 系统基础配置
 system:
   base_url: "https://c1.yonyoucloud.com/"
-  timeout: 15                # 页面加载超时时间（秒）
-  download_dir: "./downloads"  # Excel 导出目录
-
+  download_dir: "./downloads" # Excel 导出目录
 
 # 登录信息
 login:
   username: "15210385806"
   password: "lwp12345678"
 
-
 # 查询模块设置（后续补充）
 query:
-  url: ""                  # 进入查询模块的页面地址（你确定后我帮你补）
+  url: "" # 进入查询模块的页面地址（你确定后我帮你补）
   selectors:
-    query_input: ""        # 查询输入框
-    query_button: ""       # 查询按钮
-    export_button: ""      # 导出按钮
-
+    query_input: "" # 查询输入框
+    query_button: "" # 查询按钮
+    export_button: "" # 导出按钮
 
 # 数据库配置
 database:
