@@ -8,14 +8,6 @@ login:
   username: "15210385806"
   password: "lwp12345678"
 
-# 查询模块设置（后续补充）
-query:
-  url: "" # 进入查询模块的页面地址（你确定后我帮你补）
-  selectors:
-    query_input: "" # 查询输入框
-    query_button: "" # 查询按钮
-    export_button: "" # 导出按钮
-
 # 数据库配置
 database:
   host: ""

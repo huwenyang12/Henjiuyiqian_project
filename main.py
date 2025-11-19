@@ -5,8 +5,10 @@ def run():
 
     obj.login()
 
-    obj.goto_query_page()
-    # obj.run_query()
+    obj.goto_query()
+    
+    obj.run_query()
+    
     # file = obj.export_excel()
     # print("导出文件：", file)
 

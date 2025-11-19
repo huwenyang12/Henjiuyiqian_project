@@ -41,7 +41,7 @@ def try_click(locator, timeout=3):
 
 
 
-def safe_click(locator, timeout=3, retry=3, sleep=1):
+def safe_click(locator, timeout=5, retry=3, sleep=2):
     """
     通用等待点击：
     - 先等待元素出现 timeout 秒
@@ -53,7 +53,7 @@ def safe_click(locator, timeout=3, retry=3, sleep=1):
         elem = cc.wait_appear(locator, wait_timeout=timeout)
         if elem:
             elem.click()
-            time.sleep(0.5)
+            time.sleep(1)
             return True
         print(f"[safe_click] 第 {attempt}/{retry} 次等待失败：未找到元素 {locator}")
         time.sleep(sleep)

@@ -18,14 +18,15 @@ class Browser:
         self.url = cfg["system"]["base_url"]
         self.downloads_dir = cfg["system"]["download_dir"]
         os.makedirs(self.downloads_dir, exist_ok=True)
-        # 打开浏览器
-        self.tab = cc.chrome.open(self.url)
-        try_click(locator.login.button_接受,timeout=2)
-        time.sleep(2)
 
-    # ==================== 登录 ==================== 
+    # ==================== 执行登录操作 ==================== 
     def login(self):
         try:
+            # 打开浏览器
+            print("正在打开控制台网页...")
+            self.tab = cc.chrome.open(self.url)
+            try_click(locator.login.button_接受,timeout=2)
+            # 判断是否登录
             ele_logo = cc.wait_appear(locator.login.Logo, wait_timeout=3)
             if ele_logo:
                 print("已在控制台页面，无需登录")
@@ -42,31 +43,31 @@ class Browser:
             raise
 
     # ==================== 进入查询页面 ==================== 
-    def goto_query_page(self):
+    def goto_query(self):
         try:
             print("正在进入序时帐查询页面...")
             safe_click(locator.query.首页_全局导航)
             safe_click(locator.query.span_财务会计)
             safe_click(locator.query.span_序时账)
-            print("已进入序时账查询页面")
+            time.sleep(3)
             return
         except Exception as e:
             print(f"进入序时账查询页面失败：{e}")
             raise
 
-    # ==================== 执行查询 ==================== 
+    # ==================== 执行查询序时账 ==================== 
     def run_query(self):
-        qcfg = cfg["query"]
-        selectors = qcfg["selectors"]
-
-        # 输入查询内容
-        query_text = qcfg.get("query_text", "")
-        if selectors["query_input"] and query_text:
-            cc.find_element(selectors["query_input"]).set_text(query_text)
-
-        # 点击查询按钮
-        cc.find_element(selectors["query_button"]).click()
-        time.sleep(2)
+        try:
+            print("正在执行序时帐查询操作...")
+            safe_click(locator.query.button_查询)
+            safe_click(locator.query.账簿勾选)
+            cc.find_element(locator.query.tab_我的收藏).double_click()
+            time.sleep(2)
+            safe_click(locator.query.button_全部选择)
+            safe_click(locator.query.button_确定)
+        except Exception as e:
+            print(f"查询序时账失败：{e}")
+            raise
 
     # ==================== 导出 Excel ==================== 
     def export_excel(self):
@@ -89,5 +90,6 @@ class Browser:
     def close(self):
         try:
             self.tab.close()
+            print("浏览器已关闭!")
         except:
             pass

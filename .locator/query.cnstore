@@ -1,7 +1,130 @@
 {
 	"id": "be705e0d-4622-4cfd-8b56-6478b0ed3dc9",
 	"name": "query",
-	"nodes": [],
+	"nodes": [
+		{
+			"id": "62c77e3b-2a27-492a-90a7-158c24484499",
+			"name": "c1",
+			"nodes": [],
+			"locators": [
+				{
+					"id": "ab8b09bb-7000-4522-9300-9a632a4244db",
+					"name": "button_wui_button_tagbtn_add_wui_button_sm",
+					"filePath": "56a8dcc7-4d05-4a0d-86a8-c9db3e8025a8.jpg",
+					"content": {
+						"automationType": "Chrome",
+						"processName": {
+							"value": "chrome"
+						},
+						"filePath": {
+							"value": "chrome.exe"
+						},
+						"version": {
+							"value": "1.3"
+						},
+						"childControls": [
+							{
+								"identifier": {
+									"role": {
+										"value": "window"
+									},
+									"title": {
+										"value": "北京很久以前餐饮管理有限公司"
+									},
+									"url": {
+										"value": "https://c1.yonyoucloud.com/",
+										"excluded": true
+									},
+									"className": {
+										"value": "Chrome_WidgetWin_1"
+									},
+									"controlMetaType": "Tab"
+								},
+								"childControls": [
+									{
+										"identifier": {
+											"tag": {
+												"value": "BUTTON"
+											},
+											"class": {
+												"value": "wui-button tagBtn-add wui-button-sm",
+												"excluded": true
+											},
+											"type": {
+												"value": "button",
+												"excluded": false
+											},
+											"ancestorId": {
+												"value": "fha60wcg",
+												"excluded": true
+											},
+											"ancestorClass": {
+												"value": "referTaglist--e3761 referTagBox",
+												"excluded": true
+											},
+											"isLeaf": {
+												"value": "0",
+												"excluded": false
+											},
+											"cssSelector": {
+												"value": "body>div>div>div>div>div>div>div>div>div>div>div>section>section>main>div>div>div>div>div>div>div>div>div>div>div>div>div>div>div>div>div>div>div>div>div>div>div>button",
+												"excluded": true
+											},
+											"tableRow": {
+												"value": "-1",
+												"excluded": false
+											},
+											"tableCol": {
+												"value": "-1",
+												"excluded": false
+											},
+											"controlMetaType": "Web",
+											"index": {
+												"value": "1",
+												"excluded": false
+											},
+											"locale": {
+												"isCustom": true,
+												"value": "zh_CN",
+												"operator": "equals",
+												"excluded": true
+											},
+											"layout": {
+												"isCustom": true,
+												"value": "horizontal",
+												"operator": "equals",
+												"excluded": true
+											},
+											"dir": {
+												"isCustom": true,
+												"value": "ltr",
+												"operator": "equals",
+												"excluded": true
+											},
+											"fieldid": {
+												"isCustom": true,
+												"value": "134d8980-86c7-43e9-827d-ac473ab9c9ec-simple-filter-reference_mdf_canzhaoicon",
+												"operator": "equals",
+												"excluded": true
+											}
+										},
+										"childControls": [],
+										"excluded": false
+									}
+								],
+								"excluded": false
+							}
+						],
+						"parameters": {
+							"excluded": true,
+							"operator": "equals",
+							"value": ""
+						}
+					}
+				}
+			]
+		}
+	],
 	"locators": [
 		{
 			"id": "c68b1154-68d1-47db-a020-382e7d9b4f92",
@@ -47,7 +170,8 @@
 										"excluded": true
 									},
 									"ancestorId": {
-										"value": "degree4th-sequencebooks"
+										"value": "degree4th-sequencebooks",
+										"excluded": true
 									},
 									"ancestorClass": {
 										"value": "service-node ",
@@ -77,12 +201,24 @@
 									"index": {
 										"value": "1",
 										"excluded": true
+									},
+									"xPath": {
+										"excluded": false,
+										"value": "//*[@id=\"degree4th-sequencebooks\"]/span"
 									}
-								}
+								},
+								"childControls": [],
+								"excluded": false
 							}
-						]
+						],
+						"excluded": false
 					}
-				]
+				],
+				"parameters": {
+					"excluded": true,
+					"operator": "equals",
+					"value": ""
+				}
 			}
 		},
 		{
@@ -272,6 +408,602 @@
 									"xPath": {
 										"excluded": false,
 										"value": "//*[@id=\"workbench-header\"]/div[1]/div[1]/div[1]/img"
+									}
+								},
+								"childControls": [],
+								"excluded": false
+							}
+						],
+						"excluded": false
+					}
+				],
+				"parameters": {
+					"excluded": true,
+					"operator": "equals",
+					"value": ""
+				}
+			}
+		},
+		{
+			"id": "f5fd0ed5-0284-4c63-9e22-6038e3e27e47",
+			"name": "button_查询",
+			"filePath": "e53f81a6-50e4-4409-9654-37e153beab73.jpg",
+			"content": {
+				"automationType": "Chrome",
+				"processName": {
+					"value": "chrome"
+				},
+				"filePath": {
+					"value": "chrome.exe"
+				},
+				"version": {
+					"value": "1.3"
+				},
+				"childControls": [
+					{
+						"identifier": {
+							"role": {
+								"value": "window"
+							},
+							"title": {
+								"value": "北京很久以前餐饮管理有限公司"
+							},
+							"url": {
+								"value": "https://c1.yonyoucloud.com/",
+								"excluded": true
+							},
+							"className": {
+								"value": "Chrome_WidgetWin_1"
+							},
+							"controlMetaType": "Tab"
+						},
+						"childControls": [
+							{
+								"identifier": {
+									"tag": {
+										"value": "BUTTON"
+									},
+									"class": {
+										"value": "wui-button wui-button-border",
+										"excluded": true
+									},
+									"type": {
+										"value": "button",
+										"excluded": true
+									},
+									"ancestorId": {
+										"value": "89018b7f-e7d8-435e-85e8-02ee86591b2c",
+										"excluded": true
+									},
+									"ancestorClass": {
+										"value": "wui-button-group ana-header-button-group mult-child ",
+										"excluded": true
+									},
+									"isLeaf": {
+										"value": "0",
+										"excluded": true
+									},
+									"cssSelector": {
+										"value": "body>div>div>div>div>div>div>div>div>div>div>div>section>header>div>div>div>div>div>div>div>button",
+										"excluded": true
+									},
+									"sInfo": {
+										"value": "查询"
+									},
+									"tableRow": {
+										"value": "-1",
+										"excluded": true
+									},
+									"tableCol": {
+										"value": "-1",
+										"excluded": true
+									},
+									"controlMetaType": "Web",
+									"index": {
+										"value": "1",
+										"excluded": true
+									},
+									"locale": {
+										"isCustom": true,
+										"value": "zh_CN",
+										"operator": "equals",
+										"excluded": true
+									},
+									"layout": {
+										"isCustom": true,
+										"value": "horizontal",
+										"operator": "equals",
+										"excluded": true
+									},
+									"dir": {
+										"isCustom": true,
+										"value": "ltr",
+										"operator": "equals",
+										"excluded": true
+									},
+									"fieldid": {
+										"isCustom": true,
+										"value": "intelliv_header_toggle_filter_btn",
+										"operator": "equals",
+										"excluded": true
+									}
+								},
+								"childControls": [],
+								"excluded": false
+							}
+						],
+						"excluded": false
+					}
+				],
+				"parameters": {
+					"excluded": true,
+					"operator": "equals",
+					"value": ""
+				}
+			}
+		},
+		{
+			"id": "82bd7c80-6e00-4f64-a86b-87629ce67d6c",
+			"name": "button_全部选择",
+			"filePath": "1904ef49-4e79-4b43-ab08-ca76857136a3.jpg",
+			"content": {
+				"automationType": "Chrome",
+				"processName": {
+					"value": "chrome"
+				},
+				"filePath": {
+					"value": "chrome.exe"
+				},
+				"version": {
+					"value": "1.3"
+				},
+				"childControls": [
+					{
+						"identifier": {
+							"role": {
+								"value": "window"
+							},
+							"title": {
+								"value": "北京很久以前餐饮管理有限公司"
+							},
+							"url": {
+								"value": "https://c1.yonyoucloud.com/#/",
+								"excluded": true
+							},
+							"className": {
+								"value": "Chrome_WidgetWin_1"
+							},
+							"controlMetaType": "Tab"
+						},
+						"childControls": [
+							{
+								"identifier": {
+									"tag": {
+										"value": "BUTTON",
+										"excluded": false
+									},
+									"class": {
+										"value": "wui-button wui-button-sm",
+										"excluded": true
+									},
+									"type": {
+										"value": "button",
+										"excluded": true
+									},
+									"ancestorId": {
+										"value": "fiepub_fiepub_accountbooktreeref",
+										"excluded": true
+									},
+									"ancestorClass": {
+										"value": "refertree_tab_collect",
+										"excluded": true
+									},
+									"isLeaf": {
+										"value": "0",
+										"excluded": true
+									},
+									"cssSelector": {
+										"value": "body>div>div>div>div>div>div>div>div>div>div>div>section>div>div>div>div>div>div>div>div>div>div>div>div>div>button",
+										"excluded": true
+									},
+									"sInfo": {
+										"value": "全部选择",
+										"excluded": false
+									},
+									"tableRow": {
+										"value": "-1",
+										"excluded": true
+									},
+									"tableCol": {
+										"value": "-1",
+										"excluded": true
+									},
+									"controlMetaType": "Web",
+									"index": {
+										"value": "1",
+										"excluded": true
+									},
+									"locale": {
+										"isCustom": true,
+										"value": "zh_CN",
+										"operator": "equals",
+										"excluded": true
+									},
+									"layout": {
+										"isCustom": true,
+										"value": "horizontal",
+										"operator": "equals",
+										"excluded": true
+									},
+									"dir": {
+										"isCustom": true,
+										"value": "ltr",
+										"operator": "equals",
+										"excluded": true
+									},
+									"xPath": {
+										"excluded": false,
+										"value": "//*[@id=\"fiepub_fiepub_accountbooktreeref\"]/div[2]/div/div[2]/div/div/div[2]/div[2]/div/div/div/div[1]/button/span"
+									}
+								},
+								"childControls": [],
+								"excluded": false
+							}
+						],
+						"excluded": false
+					}
+				],
+				"parameters": {
+					"excluded": true,
+					"operator": "equals",
+					"value": ""
+				}
+			}
+		},
+		{
+			"id": "c449da78-816e-4052-babb-1c2c6d9f0ad0",
+			"name": "button_确定",
+			"filePath": "17a88ec5-618b-4eda-b92b-1b66af0b5e75.jpg",
+			"content": {
+				"automationType": "Chrome",
+				"processName": {
+					"value": "chrome"
+				},
+				"filePath": {
+					"value": "chrome.exe"
+				},
+				"version": {
+					"value": "1.3"
+				},
+				"childControls": [
+					{
+						"identifier": {
+							"role": {
+								"value": "window"
+							},
+							"title": {
+								"value": "北京很久以前餐饮管理有限公司"
+							},
+							"url": {
+								"value": "https://c1.yonyoucloud.com/#/",
+								"excluded": true
+							},
+							"className": {
+								"value": "Chrome_WidgetWin_1"
+							},
+							"controlMetaType": "Tab"
+						},
+						"childControls": [
+							{
+								"identifier": {
+									"tag": {
+										"value": "BUTTON"
+									},
+									"class": {
+										"value": "wui-button wui-button wui-button-primary ok-btn",
+										"excluded": true
+									},
+									"type": {
+										"value": "button",
+										"excluded": true
+									},
+									"ancestorId": {
+										"value": "fiepub_fiepub_accountbooktreeref",
+										"excluded": true
+									},
+									"ancestorClass": {
+										"value": "refer-modal-footer-box",
+										"excluded": true
+									},
+									"isLeaf": {
+										"value": "0",
+										"excluded": true
+									},
+									"cssSelector": {
+										"value": "body>div>div>div>div>div>div>div>div>div>div>div>section>div>div>div>div>div>div>div>div>button",
+										"excluded": true
+									},
+									"sInfo": {
+										"value": "确定"
+									},
+									"tableRow": {
+										"value": "-1",
+										"excluded": true
+									},
+									"tableCol": {
+										"value": "-1",
+										"excluded": true
+									},
+									"controlMetaType": "Web",
+									"index": {
+										"value": "1",
+										"excluded": true
+									},
+									"locale": {
+										"isCustom": true,
+										"value": "zh_CN",
+										"operator": "equals",
+										"excluded": true
+									},
+									"layout": {
+										"isCustom": true,
+										"value": "horizontal",
+										"operator": "equals",
+										"excluded": true
+									},
+									"dir": {
+										"isCustom": true,
+										"value": "ltr",
+										"operator": "equals",
+										"excluded": true
+									},
+									"fieldid": {
+										"isCustom": true,
+										"value": "fiepub_accountbooktreeref|ok",
+										"operator": "equals",
+										"excluded": true
+									},
+									"xPath": {
+										"excluded": false,
+										"value": "//*[@id=\"fiepub_fiepub_accountbooktreeref\"]/div[2]/div/div[3]/div/div[2]/div[2]/button[2]"
+									}
+								},
+								"childControls": [],
+								"excluded": false
+							}
+						],
+						"excluded": false
+					}
+				],
+				"parameters": {
+					"excluded": true,
+					"operator": "equals",
+					"value": ""
+				}
+			}
+		},
+		{
+			"id": "d223f6f7-a83e-4e49-a94a-b7db44608b81",
+			"name": "tab_我的收藏",
+			"filePath": "2a477c8a-f9a7-4306-a600-91bd9a3088e9.jpg",
+			"content": {
+				"automationType": "Chrome",
+				"processName": {
+					"value": "chrome"
+				},
+				"filePath": {
+					"value": "chrome.exe"
+				},
+				"version": {
+					"value": "1.3"
+				},
+				"childControls": [
+					{
+						"identifier": {
+							"role": {
+								"value": "window"
+							},
+							"title": {
+								"value": "北京很久以前餐饮管理有限公司"
+							},
+							"url": {
+								"value": "https://c1.yonyoucloud.com/#/",
+								"excluded": true
+							},
+							"className": {
+								"value": "Chrome_WidgetWin_1"
+							},
+							"controlMetaType": "Tab"
+						},
+						"childControls": [
+							{
+								"identifier": {
+									"tag": {
+										"value": "DIV"
+									},
+									"class": {
+										"value": "wui-tabs-tab",
+										"excluded": true
+									},
+									"ancestorId": {
+										"value": "fiepub_fiepub_accountbooktreeref",
+										"excluded": true
+									},
+									"ancestorClass": {
+										"value": "wui-tabs-nav wui-tabs-nav-animated",
+										"excluded": true
+									},
+									"isLeaf": {
+										"value": "1",
+										"excluded": true
+									},
+									"cssSelector": {
+										"value": "body>div>div>div>div>div>div>div>div>div>div>div>section>div>div>div>div>div>div>div>div>div>div>div>div>div>div",
+										"excluded": true
+									},
+									"sInfo": {
+										"value": "我的收藏"
+									},
+									"tableRow": {
+										"value": "-1",
+										"excluded": true
+									},
+									"tableCol": {
+										"value": "-1",
+										"excluded": true
+									},
+									"controlMetaType": "Web",
+									"index": {
+										"value": "1",
+										"excluded": true
+									},
+									"role": {
+										"isCustom": true,
+										"value": "tab",
+										"operator": "equals",
+										"excluded": true
+									},
+									"aria-disabled": {
+										"isCustom": true,
+										"value": "false",
+										"operator": "equals",
+										"excluded": true
+									},
+									"aria-selected": {
+										"isCustom": true,
+										"value": "false",
+										"operator": "equals",
+										"excluded": true
+									},
+									"nodekey": {
+										"isCustom": true,
+										"value": "collect",
+										"operator": "equals",
+										"excluded": true
+									},
+									"xPath": {
+										"excluded": false,
+										"value": "//*[@id=\"fiepub_fiepub_accountbooktreeref\"]/div[2]/div/div[2]/div/div/div[1]/div/div/div/div/div/div[2]"
+									}
+								},
+								"childControls": [],
+								"excluded": false
+							}
+						],
+						"excluded": false
+					}
+				],
+				"parameters": {
+					"excluded": true,
+					"operator": "equals",
+					"value": ""
+				}
+			}
+		},
+		{
+			"id": "1a5aca68-1a73-4b5f-bcf7-29ddd47aed11",
+			"name": "账簿勾选",
+			"filePath": "8061a578-a22a-420b-b4e7-ede0b3f840d0.jpg",
+			"content": {
+				"automationType": "Chrome",
+				"processName": {
+					"value": "chrome"
+				},
+				"filePath": {
+					"value": "chrome.exe"
+				},
+				"version": {
+					"value": "1.3"
+				},
+				"childControls": [
+					{
+						"identifier": {
+							"role": {
+								"value": "window"
+							},
+							"title": {
+								"value": "北京很久以前餐饮管理有限公司"
+							},
+							"url": {
+								"value": "https://c1.yonyoucloud.com/",
+								"excluded": true
+							},
+							"className": {
+								"value": "Chrome_WidgetWin_1"
+							},
+							"controlMetaType": "Tab"
+						},
+						"childControls": [
+							{
+								"identifier": {
+									"tag": {
+										"value": "BUTTON",
+										"excluded": true
+									},
+									"class": {
+										"value": "wui-button tagBtn-add wui-button-sm",
+										"excluded": true
+									},
+									"type": {
+										"value": "button",
+										"excluded": true
+									},
+									"ancestorId": {
+										"value": "cj1yh9d8",
+										"excluded": true
+									},
+									"ancestorClass": {
+										"value": "referTaglist--e3761 referTagBox",
+										"excluded": true
+									},
+									"isLeaf": {
+										"value": "0",
+										"excluded": true
+									},
+									"cssSelector": {
+										"value": "body>div>div>div>div>div>div>div>div>div>div>div>section>section>main>div>div>div>div>div>div>div>div>div>div>div>div>div>div>div>div>div>div>div>div>div>div>div>button",
+										"excluded": true
+									},
+									"tableRow": {
+										"value": "-1",
+										"excluded": true
+									},
+									"tableCol": {
+										"value": "-1",
+										"excluded": true
+									},
+									"controlMetaType": "Web",
+									"index": {
+										"value": "4",
+										"excluded": false
+									},
+									"locale": {
+										"isCustom": true,
+										"value": "zh_CN",
+										"operator": "equals",
+										"excluded": true
+									},
+									"layout": {
+										"isCustom": true,
+										"value": "horizontal",
+										"operator": "equals",
+										"excluded": true
+									},
+									"dir": {
+										"isCustom": true,
+										"value": "ltr",
+										"operator": "equals",
+										"excluded": true
+									},
+									"fieldid": {
+										"isCustom": true,
+										"value": "134d8980-86c7-43e9-827d-ac473ab9c9ec-simple-filter-reference_mdf_canzhaoicon",
+										"operator": "equals",
+										"excluded": true
+									},
+									"xPath": {
+										"excluded": false,
+										"value": "//button[contains(@class, 'tagBtn-add')]"
 									}
 								},
 								"childControls": [],
