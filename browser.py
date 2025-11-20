@@ -132,11 +132,6 @@ class Browser:
     # ==================== 关闭浏览器 ==================== 
     def close(self):
         try:
-            num = 5
-            for i in range(num, 0, -1):
-                print(f"\r浏览器将在 {i} 秒后关闭...", end="", flush=True)
-                time.sleep(1)
-            print("\r正在关闭浏览器...        ")
             self.tab.close()
             print("浏览器已关闭!")
             return
