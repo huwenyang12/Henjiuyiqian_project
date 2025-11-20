@@ -4,7 +4,7 @@ import yaml
 import os
 import time
 
-from utils import safe_input, try_click, safe_click, kill_chrome, wait_loading, wait_appear_strict
+from utils import safe_input, try_click, safe_click, kill_chrome, wait_loading, wait_appear_strict, split_date_range
 
 # 读取配置
 CONFIG_FILE = os.path.join(os.path.dirname(__file__), "config.yaml")
@@ -61,7 +61,7 @@ class Browser:
             raise
 
     # ==================== 执行查询序时账 ==================== 
-    def run_query(self):
+    def run_query(self, start_date, end_date):
         try:
             print("正在筛选账簿列表...")
             # TODO: 账簿少一个 00030-0005
@@ -73,15 +73,10 @@ class Browser:
             safe_click(locator.query.button_全部选择)
             safe_click(locator.query.button_确定)
 
-            print("正在填写查找日期...")
-            # 开始日期：今天。结束日期：今天+60天
-            # TODO: 起止日期跨度不能跨年
-            start_date = (datetime.today() - timedelta(days=60)).strftime("%Y-%m-%d")
-            end_date = datetime.today().strftime("%Y-%m-%d")
-
+            print(f"正在填写查找日期：{start_date} ~ {end_date}")
             safe_click(locator.query.锚点_今天)
-            safe_input(locator.query.input_开始日期, start_date)
-            safe_input(locator.query.input_结束日期, end_date)
+            safe_input(locator.query.input_开始日期, start_date.strftime("%Y-%m-%d"))
+            safe_input(locator.query.input_结束日期, end_date.strftime("%Y-%m-%d"))
             time.sleep(1)
             cc.send_hotkey("{ENTER}")
             safe_click(locator.query.锚点_期间)
@@ -128,6 +123,19 @@ class Browser:
         except Exception as e:
             print(f"导出序时账失败：{e}")
             raise
+    
+    # ==================== 条件执行查找 ==================== 
+    def run_all_queries(self):
+        date_ranges = split_date_range()
+        part = 1
+        for start_date, end_date in date_ranges:
+            print(f"\n------ 执行第 {part} 段查询 ------")
+            print(f"日期范围：{start_date} ~ {end_date}")
+            # 执行当前段落查询
+            self.run_query(start_date, end_date)
+            # 导出
+            self.save_to_excel()
+            part += 1
 
     # ==================== 关闭浏览器 ==================== 
     def close(self):

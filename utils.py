@@ -2,6 +2,8 @@ from clicknium import clicknium as cc
 import time
 import subprocess
 import pyperclip as pc
+from datetime import datetime, timedelta
+
 
 
 def safe_input(locator, text, timeout=3, retry=3, sleep=1):
@@ -112,3 +114,24 @@ def wait_appear_strict(locator, timeout=180):
             return elem
         print(f"\r[wait_appear_strict] 等待中... {elapsed}s", end="")
 
+
+def split_date_range():
+    """
+    返回日期区间列表：
+    - 不跨年：[(start, end)]
+    - 跨年：[(start, 当年12-31), (次年1-01, end)]
+    """
+    today = datetime.today()
+    start = today - timedelta(days=60)
+    start_date = start.date()
+    end_date = today.date()
+    # 不跨年
+    if start_date.year == end_date.year:
+        return [(start_date, end_date)]
+    # 跨年
+    first_end = datetime(start_date.year, 12, 31).date()
+    second_start = datetime(end_date.year, 1, 1).date()
+    return [
+        (start_date, first_end),
+        (second_start, end_date)
+    ]

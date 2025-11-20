@@ -4,14 +4,12 @@ def run():
 
     # 登录
     obj.login()
-    # 进入查找
+    # 进入查找页面
     obj.goto_query()
-    # 查找过程
-    obj.run_query()
-    # 导出Excel表
-    obj.save_to_excel()
-    # # 关闭页面
-    # obj.close()
+    # 条件判断执行
+    obj.run_all_queries()
+    # 关闭页面
+    obj.close()
 
 if __name__ == "__main__":
     try:
