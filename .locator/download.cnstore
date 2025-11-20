@@ -855,6 +855,98 @@
 					}
 				]
 			}
+		},
+		{
+			"id": "15bdc26d-2a82-477c-8f4b-0587a75bce6d",
+			"name": "div_加载中",
+			"filePath": "540eeed4-d6ba-45c2-b4ac-e4a0fe024edd.jpg",
+			"content": {
+				"automationType": "Chrome",
+				"processName": {
+					"value": "chrome"
+				},
+				"filePath": {
+					"value": "chrome.exe"
+				},
+				"version": {
+					"value": "1.3"
+				},
+				"childControls": [
+					{
+						"identifier": {
+							"role": {
+								"value": "window"
+							},
+							"title": {
+								"value": "北京很久以前餐饮管理有限公司"
+							},
+							"url": {
+								"value": "https://c1.yonyoucloud.com/",
+								"excluded": true
+							},
+							"className": {
+								"value": "Chrome_WidgetWin_1"
+							},
+							"controlMetaType": "Tab"
+						},
+						"childControls": [
+							{
+								"identifier": {
+									"tag": {
+										"value": "DIV",
+										"excluded": true
+									},
+									"class": {
+										"value": "wui-spin-spin wui-spin-dot wui-spin-dot-spin",
+										"excluded": true
+									},
+									"ancestorId": {
+										"value": "90336343-2691-449C-9429-BE1DA47137B6",
+										"excluded": true
+									},
+									"ancestorClass": {
+										"value": "wui-spin wui-spin-default wui-spin-show-text",
+										"excluded": true
+									},
+									"isLeaf": {
+										"value": "0",
+										"excluded": true
+									},
+									"cssSelector": {
+										"value": "body>div>div>div>div>div>div>div>div>div>div>div>div>div>div>div",
+										"excluded": true
+									},
+									"tableRow": {
+										"value": "-1",
+										"excluded": true
+									},
+									"tableCol": {
+										"value": "-1",
+										"excluded": true
+									},
+									"controlMetaType": "Web",
+									"index": {
+										"value": "1",
+										"excluded": false
+									},
+									"xPath": {
+										"excluded": false,
+										"value": "//div[contains(@class,'wui-spin-dot-spin')]"
+									}
+								},
+								"childControls": [],
+								"excluded": false
+							}
+						],
+						"excluded": false
+					}
+				],
+				"parameters": {
+					"excluded": true,
+					"operator": "equals",
+					"value": ""
+				}
+			}
 		}
 	]
 }

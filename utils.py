@@ -8,9 +8,7 @@ def safe_input(locator, text, timeout=3, retry=3, sleep=1):
     """
     通用输入函数：
     - 等待控件出现
-    - 清空后输入文字
     - 自动重试 retry 次
-    - 重试仍失败则抛异常
     """
     for attempt in range(1, retry + 1):
         elem = cc.wait_appear(locator, wait_timeout=timeout)
@@ -56,8 +54,6 @@ def safe_click(locator, timeout=5, retry=3, sleep=2):
     通用等待点击：
     - 先等待元素出现 timeout 秒
     - 找不到则自动重试 retry 次，每次间隔 sleep 秒
-    - 每次失败打印attempt日志
-    - 仍找不到则抛异常
     """
     for attempt in range(1, retry + 1):
         elem = cc.wait_appear(locator, wait_timeout=timeout)
@@ -79,4 +75,40 @@ def kill_chrome():
         time.sleep(1)
     except:
         pass
+
+
+def wait_loading(locator, max_timeout=60):
+    """
+    每秒检查一次加载控件是否存在
+    """
+    start = time.time()
+    while True:
+        elapsed = int(time.time() - start)
+        if elapsed >= max_timeout:
+            raise Exception(f"[wait_loading] 加载控件 {locator} 在 {max_timeout} 秒内未消失")
+        # 每秒检测是否消失
+        elem = cc.wait_appear(locator, wait_timeout=1)
+        if not elem:
+            print("\n[wait_loading] 加载完成")
+            return True
+        print(f"\r[wait_loading] 加载中... {elapsed}s", end="")
+
+
+
+def wait_appear_strict(locator, timeout=180):
+    """
+    每秒检查一次控件是否出现
+    """
+    print(f"[wait_appear_strict] 开始等待控件出现：{locator}")
+    start = time.time()
+    while True:
+        elapsed = int(time.time() - start)
+        if elapsed >= timeout:
+            raise Exception(f"[wait_appear_strict] 控件 {locator} 在 {timeout} 秒内未出现")
+        # 检测是否出现
+        elem = cc.wait_appear(locator, wait_timeout=1)
+        if elem:
+            print(f"\n[wait_appear_strict] 控件已出现")
+            return elem
+        print(f"\r[wait_appear_strict] 等待中... {elapsed}s", end="")
 

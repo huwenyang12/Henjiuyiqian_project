@@ -4,7 +4,7 @@ import yaml
 import os
 import time
 
-from utils import safe_input, try_click, safe_click, kill_chrome
+from utils import safe_input, try_click, safe_click, kill_chrome, wait_loading, wait_appear_strict
 
 # 读取配置
 CONFIG_FILE = os.path.join(os.path.dirname(__file__), "config.yaml")
@@ -75,14 +75,17 @@ class Browser:
 
             print("正在填写查找日期...")
             # 开始日期：今天。结束日期：今天+60天
-            # start_date = datetime.today().strftime("%Y-%m-%d")
             # TODO: 起止日期跨度不能跨年
-            end_date = (datetime.today() + timedelta(days=30)).strftime("%Y-%m-%d")
+            start_date = (datetime.today() - timedelta(days=60)).strftime("%Y-%m-%d")
+            end_date = datetime.today().strftime("%Y-%m-%d")
+
             safe_click(locator.query.锚点_今天)
-            # safe_input(locator.query.input_开始日期, start_date)
+            safe_input(locator.query.input_开始日期, start_date)
             safe_input(locator.query.input_结束日期, end_date)
             time.sleep(1)
             cc.send_hotkey("{ENTER}")
+            safe_click(locator.query.锚点_期间)
+
 
             print("正在筛选会计科目...")
             safe_click(locator.query.div_会计科目)
@@ -104,6 +107,8 @@ class Browser:
     # ==================== 导出 Excel ==================== 
     def save_to_excel(self):
         try:
+            wait_loading(locator.download.div_加载中)
+        
             print("正在进行导出序时账为Excel表...")
             safe_click(locator.download.button_导出)
             safe_click(locator.download.li_导出excel)
@@ -113,10 +118,8 @@ class Browser:
             filename = f"序时账_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx"
             full_path = os.path.join(self.downloads_dir, filename)
 
-            path_box = cc.wait_appear(locator.download.window_另存为, wait_timeout=15)
-            if not path_box:
-                print("路径输入框未找到")
-                return
+            wait_appear_strict(locator.download.window_另存为)
+
             safe_input(locator.download.win_input_文件名, full_path)
             time.sleep(1)
             safe_click(locator.download.win_button_保存)
