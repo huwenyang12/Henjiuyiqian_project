@@ -1,11 +1,12 @@
 from clicknium import clicknium as cc, locator, ui
+from datetime import datetime, timedelta
 import yaml
 import os
 import time
 
-from utils import safe_input, try_click, safe_click
+from utils import safe_input, try_click, safe_click, kill_chrome
 
-# 读取 config.yaml 配置
+# 读取配置
 CONFIG_FILE = os.path.join(os.path.dirname(__file__), "config.yaml")
 
 with open(CONFIG_FILE, "r", encoding="utf-8") as f:
@@ -22,15 +23,19 @@ class Browser:
     # ==================== 执行登录操作 ==================== 
     def login(self):
         try:
+            # # 清理进程
+            # kill_chrome()
+
             # 打开浏览器
             print("正在打开控制台网页...")
             self.tab = cc.chrome.open(self.url)
             try_click(locator.login.button_接受,timeout=2)
-            # 判断是否登录
+
             ele_logo = cc.wait_appear(locator.login.Logo, wait_timeout=3)
             if ele_logo:
                 print("已在控制台页面，无需登录")
                 return
+            
             print("正在进行登录...")
             safe_input(locator.login.login_username, cfg["login"]["username"])
             safe_input(locator.login.login_password, cfg["login"]["password"])
@@ -45,7 +50,7 @@ class Browser:
     # ==================== 进入查询页面 ==================== 
     def goto_query(self):
         try:
-            print("正在进入序时帐查询页面...")
+            print("正在进入序时账查询页面...")
             safe_click(locator.query.首页_全局导航)
             safe_click(locator.query.span_财务会计)
             safe_click(locator.query.span_序时账)
@@ -59,6 +64,7 @@ class Browser:
     def run_query(self):
         try:
             print("正在筛选账簿列表...")
+            # TODO: 账簿少一个 00030-0005
             safe_click(locator.query.button_查询)
             safe_click(locator.query.账簿勾选)
             time.sleep(1)
@@ -68,36 +74,69 @@ class Browser:
             safe_click(locator.query.button_确定)
 
             print("正在填写查找日期...")
-            safe_input(locator.query.input_开始日期, "2025-11-19")
-            safe_input(locator.query.input_结束日期, "2025-12-19")
+            # 开始日期：今天。结束日期：今天+60天
+            # start_date = datetime.today().strftime("%Y-%m-%d")
+            # TODO: 起止日期跨度不能跨年
+            end_date = (datetime.today() + timedelta(days=30)).strftime("%Y-%m-%d")
+            safe_click(locator.query.锚点_今天)
+            # safe_input(locator.query.input_开始日期, start_date)
+            safe_input(locator.query.input_结束日期, end_date)
             time.sleep(1)
             cc.send_hotkey("{ENTER}")
+
+            print("正在筛选会计科目...")
+            safe_click(locator.query.div_会计科目)
+            safe_click(locator.query.div_会计科目_介于)
+            safe_input(locator.query.会计科目_编码名称1,"主营业务收入")
+            safe_input(locator.query.会计科目_编码名称2,"以前年度损益调整")
+            cc.send_hotkey("{ENTER}")
+            time.sleep(1)
+            safe_click(locator.query.span_显示对方科目)
+            safe_click(locator.query.span_全景查询)
+
+            safe_click(locator.query.button_提交查询)
+            return 
 
         except Exception as e:
             print(f"查询序时账失败：{e}")
             raise
 
     # ==================== 导出 Excel ==================== 
-    def export_excel(self):
-        selectors = cfg["query"]["selectors"]
+    def save_to_excel(self):
+        try:
+            print("正在进行导出序时账为Excel表...")
+            safe_click(locator.download.button_导出)
+            safe_click(locator.download.li_导出excel)
+            safe_click(locator.download.span_原始数据导出)
+            safe_click(locator.download.button_确定导出)
 
-        # 点击导出 Excel
-        cc.find_element(selectors["export_button"]).click()
+            filename = f"序时账_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx"
+            full_path = os.path.join(self.downloads_dir, filename)
 
-        # 等待文件下载（假设下载到系统默认目录）
-        time.sleep(3)
-
-        # ⚠️ Clicknium 没有 playwright 那种 download hook
-        # 这里一般需要自己从默认 download 目录找最新文件
-        # 这里先示例用 downloads_dir 不动
-
-        # TODO: 你后续告诉我系统下载目录，我可以自动检测
-        return None
+            path_box = cc.wait_appear(locator.download.window_另存为, wait_timeout=15)
+            if not path_box:
+                print("路径输入框未找到")
+                return
+            safe_input(locator.download.win_input_文件名, full_path)
+            time.sleep(1)
+            safe_click(locator.download.win_button_保存)
+            print(f"Excel 已成功保存到：{full_path}")
+            return
+        except Exception as e:
+            print(f"导出序时账失败：{e}")
+            raise
 
     # ==================== 关闭浏览器 ==================== 
     def close(self):
         try:
+            num = 5
+            for i in range(num, 0, -1):
+                print(f"\r浏览器将在 {i} 秒后关闭...", end="", flush=True)
+                time.sleep(1)
+            print("\r正在关闭浏览器...        ")
             self.tab.close()
             print("浏览器已关闭!")
-        except:
-            pass
+            return
+        except Exception as e:
+            print(f"\n关闭浏览器时发生异常：{e}")
+

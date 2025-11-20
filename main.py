@@ -11,9 +11,11 @@ def run():
 
     # 查找过程
     obj.run_query()
+
+    # 导出Excel表
+    obj.save_to_excel()
     
     # 关闭页面
-    time.sleep(10)
     obj.close()
 
 if __name__ == "__main__":

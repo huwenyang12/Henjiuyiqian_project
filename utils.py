@@ -1,5 +1,8 @@
 from clicknium import clicknium as cc
 import time
+import subprocess
+import pyperclip as pc
+
 
 def safe_input(locator, text, timeout=3, retry=3, sleep=1):
     """
@@ -19,7 +22,10 @@ def safe_input(locator, text, timeout=3, retry=3, sleep=1):
                 time.sleep(0.1)
                 elem.send_hotkey("{DEL}")
                 time.sleep(0.1)
-                cc.send_text(text)
+                # 复制到剪贴板
+                pc.copy(text)
+                time.sleep(0.1)
+                elem.send_hotkey("^v")
                 time.sleep(0.2)
                 return True
             except:
@@ -62,3 +68,15 @@ def safe_click(locator, timeout=5, retry=3, sleep=2):
         print(f"[safe_click] 第 {attempt}/{retry} 次等待失败：未找到元素 {locator}")
         time.sleep(sleep)
     raise Exception(f"[safe_click] 点击失败：无法找到元素 {locator}，累计尝试 {retry} 次")
+
+
+def kill_chrome():
+    """
+    强制关闭所有 Chrome 进程（用于自动化前清理环境）
+    """
+    try:
+        subprocess.call("taskkill /F /IM chrome.exe", shell=True)
+        time.sleep(1)
+    except:
+        pass
+

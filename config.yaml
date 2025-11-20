@@ -1,17 +1,9 @@
 # 系统基础配置
 system:
   base_url: "https://c1.yonyoucloud.com/"
-  download_dir: "./downloads" # Excel 导出目录
+  download_dir: "D:\\下载\\序时帐导出_Excel"
 
 # 登录信息
 login:
   username: "15210385806"
   password: "lwp12345678"
-
-# 数据库配置
-database:
-  host: ""
-  port: 3306
-  user: ""
-  password: ""
-  name: ""

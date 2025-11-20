@@ -1,0 +1,860 @@
+{
+	"id": "4afb1d22-ded1-4338-8ac4-43fc23591876",
+	"name": "download",
+	"nodes": [],
+	"locators": [
+		{
+			"id": "4f0e91a6-fb2e-4f16-b0d2-52bf5450e219",
+			"name": "button_导出",
+			"filePath": "872a04b0-5342-43e9-8bcf-a5ca18ce986a.jpg",
+			"content": {
+				"automationType": "Chrome",
+				"processName": {
+					"value": "chrome"
+				},
+				"filePath": {
+					"value": "chrome.exe"
+				},
+				"version": {
+					"value": "1.3"
+				},
+				"childControls": [
+					{
+						"identifier": {
+							"role": {
+								"value": "window"
+							},
+							"title": {
+								"value": "北京很久以前餐饮管理有限公司"
+							},
+							"url": {
+								"value": "https://c1.yonyoucloud.com/",
+								"excluded": true
+							},
+							"className": {
+								"value": "Chrome_WidgetWin_1"
+							},
+							"controlMetaType": "Tab"
+						},
+						"childControls": [
+							{
+								"identifier": {
+									"tag": {
+										"value": "BUTTON",
+										"excluded": true
+									},
+									"class": {
+										"value": "wui-button no-button-style wui-button-sm wui-button-plainText wu*",
+										"excluded": true
+									},
+									"type": {
+										"value": "button",
+										"excluded": true
+									},
+									"ancestorId": {
+										"value": "89018b7f-e7d8-435e-85e8-02ee86591b2c",
+										"excluded": true
+									},
+									"ancestorClass": {
+										"value": "wui-button-text-wrap",
+										"excluded": true
+									},
+									"isLeaf": {
+										"value": "0",
+										"excluded": true
+									},
+									"cssSelector": {
+										"value": "body>div>div>div>div>div>div>div>div>div>div>div>section>header>div>div>div>div>div>div>div>button>span>button",
+										"excluded": true
+									},
+									"tableRow": {
+										"value": "-1",
+										"excluded": true
+									},
+									"tableCol": {
+										"value": "-1",
+										"excluded": true
+									},
+									"controlMetaType": "Web",
+									"index": {
+										"value": "1",
+										"excluded": false
+									},
+									"locale": {
+										"isCustom": true,
+										"value": "zh_CN",
+										"operator": "equals",
+										"excluded": true
+									},
+									"layout": {
+										"isCustom": true,
+										"value": "horizontal",
+										"operator": "equals",
+										"excluded": true
+									},
+									"dir": {
+										"isCustom": true,
+										"value": "ltr",
+										"operator": "equals",
+										"excluded": true
+									},
+									"fieldid": {
+										"isCustom": true,
+										"value": "intelliv-header-export5_btn",
+										"operator": "equals",
+										"excluded": true
+									},
+									"xPath": {
+										"excluded": false,
+										"value": "//div[contains(@class, \"ana-header-container-right-icon\")]//button[2]//span[contains(@class, \"wui-button-text-wrap\")]"
+									}
+								},
+								"childControls": [],
+								"excluded": false
+							}
+						],
+						"excluded": false
+					}
+				],
+				"parameters": {
+					"excluded": true,
+					"operator": "equals",
+					"value": ""
+				}
+			}
+		},
+		{
+			"id": "4ec4aa7e-00f2-4c03-89ae-5d61d875ce32",
+			"name": "button_确定导出",
+			"filePath": "48a08288-6fd6-4eb2-a169-533622b0af6b.jpg",
+			"content": {
+				"automationType": "Chrome",
+				"processName": {
+					"value": "chrome"
+				},
+				"filePath": {
+					"value": "chrome.exe"
+				},
+				"version": {
+					"value": "1.3"
+				},
+				"childControls": [
+					{
+						"identifier": {
+							"role": {
+								"value": "window"
+							},
+							"title": {
+								"value": "北京很久以前餐饮管理有限公司"
+							},
+							"url": {
+								"value": "https://c1.yonyoucloud.com/",
+								"excluded": true
+							},
+							"className": {
+								"value": "Chrome_WidgetWin_1"
+							},
+							"controlMetaType": "Tab"
+						},
+						"childControls": [
+							{
+								"identifier": {
+									"tag": {
+										"value": "BUTTON"
+									},
+									"class": {
+										"value": "wui-button wui-modal-ok-button wui-button-primary",
+										"excluded": true
+									},
+									"type": {
+										"value": "button",
+										"excluded": false
+									},
+									"ancestorId": {
+										"value": "89018b7f-e7d8-435e-85e8-02ee86591b2c",
+										"excluded": true
+									},
+									"ancestorClass": {
+										"value": "wui-modal-footer",
+										"excluded": true
+									},
+									"isLeaf": {
+										"value": "0",
+										"excluded": true
+									},
+									"cssSelector": {
+										"value": "body>div>div>div>div>div>div>div>div>div>div>div>section>div>div>div>div>div>button",
+										"excluded": true
+									},
+									"sInfo": {
+										"value": "确定"
+									},
+									"tableRow": {
+										"value": "-1",
+										"excluded": true
+									},
+									"tableCol": {
+										"value": "-1",
+										"excluded": true
+									},
+									"controlMetaType": "Web",
+									"index": {
+										"value": "1",
+										"excluded": true
+									},
+									"fieldid": {
+										"isCustom": true,
+										"value": "analysis|browser|common_modal_footer_ok",
+										"operator": "equals",
+										"excluded": true
+									}
+								},
+								"childControls": [],
+								"excluded": false
+							}
+						],
+						"excluded": false
+					}
+				],
+				"parameters": {
+					"excluded": true,
+					"operator": "equals",
+					"value": ""
+				}
+			}
+		},
+		{
+			"id": "b9c790c5-fb2a-40fc-9b66-386c9e01bd83",
+			"name": "li_导出excel",
+			"filePath": "235f99df-e71c-4558-b047-86cd666cf863.jpg",
+			"content": {
+				"automationType": "Chrome",
+				"processName": {
+					"value": "chrome"
+				},
+				"filePath": {
+					"value": "chrome.exe"
+				},
+				"version": {
+					"value": "1.3"
+				},
+				"childControls": [
+					{
+						"identifier": {
+							"role": {
+								"value": "window"
+							},
+							"title": {
+								"value": "北京很久以前餐饮管理有限公司"
+							},
+							"url": {
+								"value": "https://c1.yonyoucloud.com/",
+								"excluded": true
+							},
+							"className": {
+								"value": "Chrome_WidgetWin_1"
+							},
+							"controlMetaType": "Tab"
+						},
+						"childControls": [
+							{
+								"identifier": {
+									"tag": {
+										"value": "LI"
+									},
+									"class": {
+										"value": "wui-dropdown-menu-item wui-dropdown-menu-item-active wui-dropdown-menu-item-only-child",
+										"excluded": true
+									},
+									"ancestorId": {
+										"value": "89018b7f-e7d8-435e-85e8-02ee86591b2c",
+										"excluded": true
+									},
+									"ancestorClass": {
+										"value": "wui-dropdown-menu wui-dropdown-menu-root wui-dropdown-menu-vertical wui-dropdown-menu-light wui-dropdown-menu-match-trigger",
+										"excluded": true
+									},
+									"isLeaf": {
+										"value": "1",
+										"excluded": true
+									},
+									"cssSelector": {
+										"value": "body>div>div>div>div>div>div>div>div>div>div>div>section>header>div>div>div>div>div>div>ul>li",
+										"excluded": true
+									},
+									"sInfo": {
+										"value": "导出Excel",
+										"excluded": true
+									},
+									"tableRow": {
+										"value": "-1",
+										"excluded": true
+									},
+									"tableCol": {
+										"value": "-1",
+										"excluded": true
+									},
+									"tabIndex": {
+										"value": "-1",
+										"excluded": true
+									},
+									"title": {
+										"value": "导出Excel"
+									},
+									"controlMetaType": "Web",
+									"index": {
+										"value": "1",
+										"excluded": true
+									},
+									"role": {
+										"isCustom": true,
+										"value": "menuitem",
+										"operator": "equals",
+										"excluded": true
+									},
+									"fieldid": {
+										"isCustom": true,
+										"value": "analysis|toolbar|export|export_excel",
+										"operator": "equals",
+										"excluded": true
+									},
+									"date-for-wui-tooltip": {
+										"isCustom": true,
+										"value": "wui-tooltip-h41jrct5go",
+										"operator": "equals",
+										"excluded": true
+									},
+									"domkey": {
+										"isCustom": true,
+										"value": "tooltip:r6q:",
+										"operator": "equals",
+										"excluded": true
+									},
+									"aria-disabled": {
+										"isCustom": true,
+										"value": "false",
+										"operator": "equals",
+										"excluded": true
+									},
+									"data-menu-id": {
+										"isCustom": true,
+										"value": "rc-menu-uuid-82099-4-xlsx",
+										"operator": "equals",
+										"excluded": true
+									}
+								}
+							}
+						]
+					}
+				]
+			}
+		},
+		{
+			"id": "5ac38783-9623-4fe9-97ff-104ba341a404",
+			"name": "span_原始数据导出",
+			"filePath": "16baeb1c-5969-4603-b67d-813b39194936.jpg",
+			"content": {
+				"automationType": "Chrome",
+				"processName": {
+					"value": "chrome"
+				},
+				"filePath": {
+					"value": "chrome.exe"
+				},
+				"version": {
+					"value": "1.3"
+				},
+				"childControls": [
+					{
+						"identifier": {
+							"role": {
+								"value": "window"
+							},
+							"title": {
+								"value": "北京很久以前餐饮管理有限公司"
+							},
+							"url": {
+								"value": "https://c1.yonyoucloud.com/",
+								"excluded": true
+							},
+							"className": {
+								"value": "Chrome_WidgetWin_1"
+							},
+							"controlMetaType": "Tab"
+						},
+						"childControls": [
+							{
+								"identifier": {
+									"tag": {
+										"value": "SPAN",
+										"excluded": true
+									},
+									"class": {
+										"value": "wui-radio-label",
+										"excluded": true
+									},
+									"ancestorId": {
+										"value": "89018b7f-e7d8-435e-85e8-02ee86591b2c",
+										"excluded": true
+									},
+									"ancestorClass": {
+										"value": "wui-radio wui-radio-sm",
+										"excluded": true
+									},
+									"isLeaf": {
+										"value": "1",
+										"excluded": true
+									},
+									"cssSelector": {
+										"value": "body>div>div>div>div>div>div>div>div>div>div>div>section>div>div>div>div>div>div>div>div>label>span",
+										"excluded": true
+									},
+									"sInfo": {
+										"value": "原始数据导出",
+										"excluded": true
+									},
+									"tableRow": {
+										"value": "-1",
+										"excluded": true
+									},
+									"tableCol": {
+										"value": "-1",
+										"excluded": true
+									},
+									"controlMetaType": "Web",
+									"index": {
+										"value": "1",
+										"excluded": true
+									},
+									"xPath": {
+										"excluded": false,
+										"value": "//div[contains(@class, \"export-setting-modal-body\")]//input[@value=\"origin\"]"
+									}
+								},
+								"childControls": [],
+								"excluded": false
+							}
+						],
+						"excluded": false
+					}
+				],
+				"parameters": {
+					"excluded": true,
+					"operator": "equals",
+					"value": ""
+				}
+			}
+		},
+		{
+			"id": "bc56755c-ae57-440b-b96c-6d046fe959a2",
+			"name": "win_button_保存",
+			"filePath": "1dc71d67-9b27-400a-8f78-b52ef837c85d.jpg",
+			"content": {
+				"automationType": "Uia",
+				"processName": {
+					"value": "chrome"
+				},
+				"filePath": {
+					"value": "chrome.exe"
+				},
+				"version": {
+					"value": "1.3"
+				},
+				"childControls": [
+					{
+						"identifier": {
+							"automationId": {
+								"value": "",
+								"excluded": true
+							},
+							"isPassword": {
+								"value": "False",
+								"excluded": true
+							},
+							"orientation": {
+								"value": "None",
+								"excluded": true
+							},
+							"role": {
+								"value": "window"
+							},
+							"isDirectChild": {
+								"value": "True"
+							},
+							"className": {
+								"value": "Chrome_WidgetWin_1"
+							},
+							"controlMetaType": "Uia",
+							"name": {
+								"value": "北京很久以前餐饮管理有限公司 - Google Chrome"
+							},
+							"index": {
+								"value": "1",
+								"excluded": true
+							}
+						},
+						"childControls": [
+							{
+								"identifier": {
+									"automationId": {
+										"value": "",
+										"excluded": true
+									},
+									"isPassword": {
+										"value": "False",
+										"excluded": true
+									},
+									"orientation": {
+										"value": "None",
+										"excluded": true
+									},
+									"role": {
+										"value": "window"
+									},
+									"isDirectChild": {
+										"value": "True"
+									},
+									"className": {
+										"value": "#32770"
+									},
+									"controlMetaType": "Uia",
+									"name": {
+										"value": "另存为"
+									},
+									"index": {
+										"value": "1",
+										"excluded": true
+									}
+								},
+								"childControls": [
+									{
+										"identifier": {
+											"automationId": {
+												"value": "1"
+											},
+											"isPassword": {
+												"value": "False",
+												"excluded": true
+											},
+											"orientation": {
+												"value": "None",
+												"excluded": true
+											},
+											"role": {
+												"value": "button"
+											},
+											"accessKey": {
+												"value": "Alt+s"
+											},
+											"isDirectChild": {
+												"value": "True"
+											},
+											"className": {
+												"value": "Button"
+											},
+											"controlMetaType": "Uia",
+											"name": {
+												"value": "保存(S)",
+												"excluded": true
+											},
+											"index": {
+												"value": "1",
+												"excluded": true
+											}
+										}
+									}
+								]
+							}
+						]
+					}
+				]
+			}
+		},
+		{
+			"id": "b0973a1e-52b3-4416-bf4a-cebee2797704",
+			"name": "win_input_文件名",
+			"filePath": "40b22cd7-811a-422c-9244-a643da19cf9c.jpg",
+			"content": {
+				"automationType": "Uia",
+				"processName": {
+					"value": "chrome"
+				},
+				"filePath": {
+					"value": "chrome.exe"
+				},
+				"version": {
+					"value": "1.3"
+				},
+				"childControls": [
+					{
+						"identifier": {
+							"automationId": {
+								"value": "",
+								"excluded": true
+							},
+							"isPassword": {
+								"value": "False",
+								"excluded": true
+							},
+							"orientation": {
+								"value": "None",
+								"excluded": true
+							},
+							"role": {
+								"value": "window"
+							},
+							"isDirectChild": {
+								"value": "True"
+							},
+							"className": {
+								"value": "Chrome_WidgetWin_1"
+							},
+							"controlMetaType": "Uia",
+							"name": {
+								"value": "北京很久以前餐饮管理有限公司 - Google Chrome"
+							},
+							"index": {
+								"value": "1",
+								"excluded": true
+							}
+						},
+						"childControls": [
+							{
+								"identifier": {
+									"automationId": {
+										"value": "",
+										"excluded": true
+									},
+									"isPassword": {
+										"value": "False",
+										"excluded": true
+									},
+									"orientation": {
+										"value": "None",
+										"excluded": true
+									},
+									"role": {
+										"value": "window"
+									},
+									"isDirectChild": {
+										"value": "True"
+									},
+									"className": {
+										"value": "#32770"
+									},
+									"controlMetaType": "Uia",
+									"name": {
+										"value": "另存为"
+									},
+									"index": {
+										"value": "1",
+										"excluded": true
+									}
+								},
+								"childControls": [
+									{
+										"identifier": {
+											"automationId": {
+												"value": "",
+												"excluded": true
+											},
+											"isPassword": {
+												"value": "False",
+												"excluded": true
+											},
+											"orientation": {
+												"value": "None",
+												"excluded": true
+											},
+											"role": {
+												"value": "pane"
+											},
+											"isDirectChild": {
+												"value": "True"
+											},
+											"className": {
+												"value": "DUIViewWndClassName"
+											},
+											"controlMetaType": "Uia",
+											"name": {
+												"value": "",
+												"excluded": true
+											},
+											"index": {
+												"value": "1",
+												"excluded": true
+											}
+										},
+										"childControls": [
+											{
+												"identifier": {
+													"automationId": {
+														"value": "FileNameControlHost"
+													},
+													"isPassword": {
+														"value": "False",
+														"excluded": true
+													},
+													"acceleratorKey": {
+														"value": "Alt+N"
+													},
+													"orientation": {
+														"value": "None",
+														"excluded": true
+													},
+													"role": {
+														"value": "comboBox"
+													},
+													"accessKey": {
+														"value": "Alt+N"
+													},
+													"isDirectChild": {
+														"value": "True"
+													},
+													"className": {
+														"value": "AppControlHost"
+													},
+													"controlMetaType": "Uia",
+													"name": {
+														"value": "文件名:",
+														"excluded": true
+													},
+													"index": {
+														"value": "1",
+														"excluded": true
+													}
+												},
+												"childControls": [
+													{
+														"identifier": {
+															"automationId": {
+																"value": "1001"
+															},
+															"isPassword": {
+																"value": "False",
+																"excluded": true
+															},
+															"orientation": {
+																"value": "None",
+																"excluded": true
+															},
+															"role": {
+																"value": "edit"
+															},
+															"isDirectChild": {
+																"value": "True"
+															},
+															"className": {
+																"value": "Edit"
+															},
+															"controlMetaType": "Uia",
+															"name": {
+																"value": "文件名:",
+																"excluded": true
+															},
+															"index": {
+																"value": "1",
+																"excluded": true
+															}
+														}
+													}
+												]
+											}
+										]
+									}
+								]
+							}
+						]
+					}
+				]
+			}
+		},
+		{
+			"id": "1738f1a7-35aa-49e0-9d56-a0885b2d14b3",
+			"name": "window_另存为",
+			"filePath": "574c7050-0d70-489d-9ace-d275bf03f22b.jpg",
+			"content": {
+				"automationType": "Uia",
+				"processName": {
+					"value": "chrome"
+				},
+				"filePath": {
+					"value": "chrome.exe"
+				},
+				"version": {
+					"value": "1.3"
+				},
+				"childControls": [
+					{
+						"identifier": {
+							"automationId": {
+								"value": "",
+								"excluded": true
+							},
+							"isPassword": {
+								"value": "False",
+								"excluded": true
+							},
+							"orientation": {
+								"value": "None",
+								"excluded": true
+							},
+							"role": {
+								"value": "window"
+							},
+							"isDirectChild": {
+								"value": "True"
+							},
+							"className": {
+								"value": "Chrome_WidgetWin_1"
+							},
+							"controlMetaType": "Uia",
+							"name": {
+								"value": "北京很久以前餐饮管理有限公司 - Google Chrome"
+							},
+							"index": {
+								"value": "1",
+								"excluded": true
+							}
+						},
+						"childControls": [
+							{
+								"identifier": {
+									"automationId": {
+										"value": "",
+										"excluded": true
+									},
+									"isPassword": {
+										"value": "False",
+										"excluded": true
+									},
+									"orientation": {
+										"value": "None",
+										"excluded": true
+									},
+									"role": {
+										"value": "window"
+									},
+									"isDirectChild": {
+										"value": "True"
+									},
+									"className": {
+										"value": "#32770"
+									},
+									"controlMetaType": "Uia",
+									"name": {
+										"value": "另存为"
+									},
+									"index": {
+										"value": "1",
+										"excluded": true
+									}
+								}
+							}
+						]
+					}
+				]
+			}
+		}
+	]
+}
