@@ -3,6 +3,7 @@ import time
 import subprocess
 import pyperclip as pc
 from datetime import datetime, timedelta
+from log import logger
 
 
 
@@ -28,10 +29,10 @@ def safe_input(locator, text, timeout=3, retry=3, sleep=1):
                 time.sleep(0.2)
                 return True
             except:
-                print(f"[safe_input] 第 {attempt}/{retry} 次输入失败：{locator}")
+                logger.warning(f"[safe_input] 第 {attempt}/{retry} 次输入失败：{locator}")
                 time.sleep(sleep)
         else:
-            print(f"[safe_input] 第 {attempt}/{retry} 次等待控件失败：{locator}")
+            logger.warning(f"[safe_input] 第 {attempt}/{retry} 次等待控件失败：{locator}")
             time.sleep(sleep)
     raise Exception(f"[safe_input] 输入失败：无法找到或输入 {locator}，累计尝试 {retry} 次")
 
@@ -62,7 +63,7 @@ def safe_click(locator, timeout=5, retry=3, sleep=2):
             elem.click()
             time.sleep(1)
             return True
-        print(f"[safe_click] 第 {attempt}/{retry} 次等待失败：未找到元素 {locator}")
+        logger.warning(f"[safe_click] 第 {attempt}/{retry} 次等待失败：未找到元素 {locator}")
         time.sleep(sleep)
     raise Exception(f"[safe_click] 点击失败：无法找到元素 {locator}，累计尝试 {retry} 次")
 
@@ -78,38 +79,55 @@ def kill_chrome():
         pass
 
 
-def wait_loading(locator, max_timeout=60):
+def wait_loading(locator, timeout=60, interval=3):
     """
-    每秒检查一次加载控件是否存在
+    每秒检查一次控件是否还存在
+    - timeout：最大检测时间
+    - Interval：日志打印等待间隔
     """
+    logger.info(f"[wait_loading] 等待加载控件消失...")
     start = time.time()
+    next_log_time = start + interval
+
     while True:
-        elapsed = int(time.time() - start)
-        if elapsed >= max_timeout:
-            raise Exception(f"[wait_loading] 加载控件 {locator} 在 {max_timeout} 秒内未消失")
+        now = time.time()
+        elapsed = int(now - start)
+        if elapsed >= timeout:
+            logger.error(f"[wait_loading] 加载控件 {locator} 在 {timeout}s 内未消失")
+            raise Exception(f"[wait_loading] 加载控件 {locator} 在 {timeout}s 内未消失")
         elem = cc.wait_appear(locator, wait_timeout=1)
         if not elem:
-            print("\n[wait_loading] 加载完成")
+            logger.info("[wait_loading] 加载完成")
             return True
-        print(f"\r[wait_loading] 加载中... {elapsed}s", end="")
+        if now >= next_log_time:
+            logger.info(f"[wait_loading] 加载中... 已等待 {elapsed}s")
+            next_log_time += interval
 
 
-
-def wait_appear_strict(locator, timeout=180):
+def wait_appear_strict(locator, timeout=180, interval=15):
     """
     每秒检查一次控件是否出现
+    - timeout：最大检测时间
+    - Interval：日志打印等待间隔
     """
-    print(f"[wait_appear_strict] 开始等待控件出现...")
+    logger.info(f"[wait_appear_strict] 开始等待控件出现...")
     start = time.time()
+    next_log_time = start + interval
+
     while True:
-        elapsed = int(time.time() - start)
+        now = time.time()
+        elapsed = int(now - start)
         if elapsed >= timeout:
-            raise Exception(f"[wait_appear_strict] 控件 {locator} 在 {timeout} 秒内未出现")
+            logger.error(f"[wait_appear_strict] 控件 {locator} 在 {timeout}s 内未出现")
+            raise Exception(f"[wait_appear_strict] 控件 {locator} 在 {timeout}s 内未出现")
         elem = cc.wait_appear(locator, wait_timeout=1)
         if elem:
-            print(f"\n[wait_appear_strict] 控件已出现")
+            logger.info("[wait_appear_strict] 控件已出现")
             return True
-        print(f"\r[wait_appear_strict] 等待中... {elapsed}s", end="")
+        if now >= next_log_time:
+            logger.info(f"[wait_appear_strict] 等待中... 已等待 {elapsed}s")
+            next_log_time += interval
+
 
 
 def split_date_range():

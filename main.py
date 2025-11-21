@@ -1,10 +1,11 @@
 from browser import Browser
+from log import logger
 
 def run():
     obj = Browser()
 
     obj.login()
-
+    
     obj.goto_query()
 
     obj.run_all_queries()
@@ -13,8 +14,9 @@ def run():
 
 if __name__ == "__main__":
     try:
-        print("开始执行任务")
+        logger.info("")
+        logger.info("开始执行任务")
         run()
-        print("任务执行完成！")
+        logger.info("任务执行完成！")
     except Exception as e:
-        print(f"任务失败：{e}")
+        logger.error(f"任务失败：{e}")
