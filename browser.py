@@ -6,7 +6,6 @@ import time
 
 from utils import safe_input, try_click, safe_click, kill_chrome, wait_loading, wait_appear_strict, split_date_range
 
-# 读取配置
 CONFIG_FILE = os.path.join(os.path.dirname(__file__), "config.yaml")
 
 with open(CONFIG_FILE, "r", encoding="utf-8") as f:
@@ -15,7 +14,6 @@ with open(CONFIG_FILE, "r", encoding="utf-8") as f:
 class Browser:
 
     def __init__(self):
-        # 打开系统主页面
         self.url = cfg["system"]["base_url"]
         self.downloads_dir = cfg["system"]["download_dir"]
         os.makedirs(self.downloads_dir, exist_ok=True)
@@ -26,7 +24,6 @@ class Browser:
             # # 清理进程
             # kill_chrome()
 
-            # 打开浏览器
             print("正在打开控制台网页...")
             self.tab = cc.chrome.open(self.url)
             try_click(locator.login.button_接受,timeout=2)
@@ -35,7 +32,6 @@ class Browser:
             if ele_logo:
                 print("已在控制台页面，无需登录")
                 return
-            
             print("正在进行登录...")
             safe_input(locator.login.login_username, cfg["login"]["username"])
             safe_input(locator.login.login_password, cfg["login"]["password"])
@@ -73,7 +69,6 @@ class Browser:
             safe_click(locator.query.button_全部选择)
             safe_click(locator.query.button_确定)
 
-            print(f"正在填写查找日期：{start_date} ~ {end_date}")
             safe_click(locator.query.锚点_今天)
             safe_input(locator.query.input_开始日期, start_date.strftime("%Y-%m-%d"))
             safe_input(locator.query.input_结束日期, end_date.strftime("%Y-%m-%d"))
@@ -126,23 +121,41 @@ class Browser:
     
     # ==================== 条件执行查找 ==================== 
     def run_all_queries(self):
-        date_ranges = split_date_range()
-        part = 1
-        for start_date, end_date in date_ranges:
-            print(f"\n------ 执行第 {part} 段查询 ------")
-            print(f"日期范围：{start_date} ~ {end_date}")
-            # 执行当前段落查询
+        # date_ranges = split_date_range()
+        date_ranges = date_ranges = [(datetime(2024, 11, 11).date(), datetime(2024, 12, 31).date()),(datetime(2025, 1, 1).date(), datetime(2025, 1, 10).date())]
+        total = len(date_ranges)
+
+        print(f"\n本次需要执行 {total} 段查询\n")
+        
+        for idx, (start_date, end_date) in enumerate(date_ranges, start=1):
+            if idx != 1:
+                print("[刷新等待6s...]")
+                elem = cc.find_element(locator.download.p_序时账)
+                elem.click("right")
+                safe_click(locator.download.div_刷新)
+                time.sleep(6)
+
+            print(f"--- 开始第 {idx} 段查询 ---")
+            print(f"日期范围：{start_date} 至 {end_date}")
+            # 执行查询
             self.run_query(start_date, end_date)
+            print("查询完成，正在导出 Excel...")
             # 导出
             self.save_to_excel()
-            part += 1
+            print(f"第 {idx} 段导出完成\n")
+            
+        print("所有查询与导出已完成。")
 
     # ==================== 关闭浏览器 ==================== 
     def close(self):
         try:
+            num = 5
+            for i in range(num, 0, -1):
+                print(f"\r浏览器将在 {i} 秒后关闭...", end="", flush=True)
+                time.sleep(1)
+            print("\r正在关闭浏览器...        ")
             self.tab.close()
-            print("浏览器已关闭!")
-            return
+            print("浏览器已关闭。")
         except Exception as e:
             print(f"\n关闭浏览器时发生异常：{e}")
 

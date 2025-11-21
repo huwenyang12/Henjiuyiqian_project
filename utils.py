@@ -22,7 +22,6 @@ def safe_input(locator, text, timeout=3, retry=3, sleep=1):
                 time.sleep(0.1)
                 elem.send_hotkey("{DEL}")
                 time.sleep(0.1)
-                # 复制到剪贴板
                 pc.copy(text)
                 time.sleep(0.1)
                 elem.send_hotkey("^v")
@@ -88,7 +87,6 @@ def wait_loading(locator, max_timeout=60):
         elapsed = int(time.time() - start)
         if elapsed >= max_timeout:
             raise Exception(f"[wait_loading] 加载控件 {locator} 在 {max_timeout} 秒内未消失")
-        # 每秒检测是否消失
         elem = cc.wait_appear(locator, wait_timeout=1)
         if not elem:
             print("\n[wait_loading] 加载完成")
@@ -101,13 +99,12 @@ def wait_appear_strict(locator, timeout=180):
     """
     每秒检查一次控件是否出现
     """
-    print(f"[wait_appear_strict] 开始等待控件出现：{locator}")
+    print(f"[wait_appear_strict] 开始等待控件出现...")
     start = time.time()
     while True:
         elapsed = int(time.time() - start)
         if elapsed >= timeout:
             raise Exception(f"[wait_appear_strict] 控件 {locator} 在 {timeout} 秒内未出现")
-        # 检测是否出现
         elem = cc.wait_appear(locator, wait_timeout=1)
         if elem:
             print(f"\n[wait_appear_strict] 控件已出现")
@@ -125,10 +122,9 @@ def split_date_range():
     start = today - timedelta(days=60)
     start_date = start.date()
     end_date = today.date()
-    # 不跨年
     if start_date.year == end_date.year:
         return [(start_date, end_date)]
-    # 跨年
+    # 跨年（2025-11-11 ~ 2026-01-10：[(2025-11-11, 2025-12-31), (2026-01-01, 2026-01-10)]
     first_end = datetime(start_date.year, 12, 31).date()
     second_start = datetime(end_date.year, 1, 1).date()
     return [
