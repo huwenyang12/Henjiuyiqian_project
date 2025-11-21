@@ -51,7 +51,6 @@ class Browser:
             safe_click(locator.query.span_财务会计)
             safe_click(locator.query.span_序时账)
             time.sleep(3)
-            return
         except Exception as e:
             print(f"进入序时账查询页面失败：{e}")
             raise
@@ -88,7 +87,6 @@ class Browser:
             safe_click(locator.query.span_全景查询)
 
             safe_click(locator.query.button_提交查询)
-            return 
 
         except Exception as e:
             print(f"查询序时账失败：{e}")
@@ -114,15 +112,16 @@ class Browser:
             time.sleep(1)
             safe_click(locator.download.win_button_保存)
             print(f"Excel 已成功保存到：{full_path}")
-            return
+            return full_path
         except Exception as e:
             print(f"导出序时账失败：{e}")
             raise
     
     # ==================== 条件执行查找 ==================== 
     def run_all_queries(self):
-        # date_ranges = split_date_range()
-        date_ranges = date_ranges = [(datetime(2024, 11, 11).date(), datetime(2024, 12, 31).date()),(datetime(2025, 1, 1).date(), datetime(2025, 1, 10).date())]
+        date_ranges = split_date_range()
+        # 测试
+        # date_ranges = date_ranges = [(datetime(2024, 11, 11).date(), datetime(2024, 12, 31).date()),(datetime(2025, 1, 1).date(), datetime(2025, 1, 10).date())]
         total = len(date_ranges)
 
         print(f"\n本次需要执行 {total} 段查询\n")

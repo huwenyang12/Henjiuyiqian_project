@@ -108,7 +108,7 @@ def wait_appear_strict(locator, timeout=180):
         elem = cc.wait_appear(locator, wait_timeout=1)
         if elem:
             print(f"\n[wait_appear_strict] 控件已出现")
-            return elem
+            return True
         print(f"\r[wait_appear_strict] 等待中... {elapsed}s", end="")
 
 
