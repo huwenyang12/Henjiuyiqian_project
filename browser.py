@@ -117,6 +117,17 @@ class Browser:
         except Exception as e:
             logger.error(f"导出序时账失败：{e}")
             raise
+
+    # ==================== 关闭浏览器 ==================== 
+    def close(self):
+        try:
+            logger.info(f"浏览器将在 5 秒后关闭...")
+            time.sleep(5)                
+            self.tab.close()
+            logger.info("浏览器已关闭。")
+        except Exception as e:
+            logger.error(f"关闭浏览器时发生异常：{e}")
+
     
     # ==================== 条件执行查找 ==================== 
     def run_all_queries(self):
@@ -144,14 +155,3 @@ class Browser:
             logger.info(f"第 {idx} 段导出完成")
             
         logger.info("所有查询与导出已完成。")
-
-    # ==================== 关闭浏览器 ==================== 
-    def close(self):
-        try:
-            logger.info(f"浏览器将在 5 秒后关闭...")
-            time.sleep(5)                
-            self.tab.close()
-            logger.info("浏览器已关闭。")
-        except Exception as e:
-            logger.error(f"关闭浏览器时发生异常：{e}")
-
