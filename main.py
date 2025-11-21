@@ -12,6 +12,8 @@ def run():
 
     obj.close()
 
+    # TODO: 解析入库
+
 if __name__ == "__main__":
     try:
         logger.info("")
