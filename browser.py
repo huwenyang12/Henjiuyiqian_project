@@ -5,7 +5,7 @@ import os
 import time
 from log import logger 
 
-from utils import Utils
+from utils import Utils, UI
 
 CONFIG_FILE = os.path.join(os.path.dirname(__file__), "config.yaml")
 
@@ -23,26 +23,22 @@ class Browser:
     def login(self):
         try:
             # # 清理进程
-            # kill_chrome()
+            # Utils.kill_chrome()
 
             logger.info("正在打开控制台网页...")
             self.tab = cc.chrome.open(self.url)
-            Utils.try_click(locator.login.button_接受,timeout=2)
+            UI.try_click(locator.login.button_接受,timeout=2)
 
-            ele_logo = cc.wait_appear(locator.login.Logo, wait_timeout=3)
+            ele_logo = cc.wait_appear(locator.login.Logo, wait_timeout=1)
             if ele_logo:
                 logger.info("已在控制台页面，无需登录")
                 return
             logger.info("正在进行登录...")
-            Utils.safe_input(locator.login.login_username, cfg["login"]["username"])
-            Utils.safe_input(locator.login.login_password, cfg["login"]["password"])
-            Utils.safe_click(locator.login.button_登录)
-            time.sleep(2)
-            ele_logo_after = cc.wait_appear(locator.login.Logo, wait_timeout=5)
-            if ele_logo_after: 
-                logger.info("登录成功！")
-            else:
-                raise Exception("登录失败：未检测到主页面Logo")
+            UI.safe_input(locator.login.login_username, cfg["login"]["username"])
+            UI.safe_input(locator.login.login_password, cfg["login"]["password"])
+            UI.click_and_wait(locator.login.button_登录, locator.login.Logo)
+            UI.wait_loading(locator.download.div_加载中)
+            logger.info("登录成功！")
         except Exception as e:
             logger.error(f"进入登录失败：{e}")
             raise
@@ -51,77 +47,56 @@ class Browser:
     def goto_query(self):
         try:
             logger.info("正在进入序时账查询页面...")
-            Utils.safe_click(locator.query.首页_全局导航)
-            Utils.safe_click(locator.query.span_财务会计)
-            Utils.safe_click(locator.query.span_序时账)
-            time.sleep(3)
+            UI.safe_click(locator.query.首页_全局导航)
+            UI.safe_click(locator.query.span_财务会计)
+            UI.click_and_wait(locator.query.span_序时账, locator.query.button_查询)
         except Exception as e:
             logger.error(f"进入序时账查询页面失败：{e}")
             raise
-
-    # ==================== 执行查询序时账 ==================== 
-    def run_query(self, start_date, end_date):
-        try:
-            logger.info("正在筛选账簿列表...")
-            # TODO: 账簿少一个 00030-0005
-            Utils.safe_click(locator.query.button_查询)
-            Utils.safe_click(locator.query.账簿勾选)
-            time.sleep(0.5)
-            cc.find_element(locator.query.tab_我的收藏).double_click()
-            time.sleep(2)
-            Utils.safe_click(locator.query.button_全部选择)
-            Utils.safe_click(locator.query.button_确定)
-
-            Utils.safe_click(locator.query.锚点_今天)
-            Utils.safe_input(locator.query.input_开始日期, start_date.strftime("%Y-%m-%d"))
-            Utils.safe_input(locator.query.input_结束日期, end_date.strftime("%Y-%m-%d"))
-            time.sleep(0.5)
-            cc.send_hotkey("{ENTER}")
-            Utils.safe_click(locator.query.锚点_期间)
-
-            logger.info("正在筛选会计科目...")
-            Utils.safe_click(locator.query.div_会计科目)
-            Utils.safe_click(locator.query.div_会计科目_介于)
-            Utils.safe_input(locator.query.会计科目_编码名称1,"主营业务收入")
-            Utils.safe_input(locator.query.会计科目_编码名称2,"以前年度损益调整")
-            cc.send_hotkey("{ENTER}")
-            time.sleep(0.5)
-
-            Utils.safe_click(locator.query.span_显示对方科目)
-            Utils.safe_click(locator.query.span_全景查询)
-            time.sleep(0.5)
-            
-            logger.info("正在选择币种范围...")
-            Utils.safe_click(locator.query.div_币种范围)
-            Utils.safe_click(locator.query.li_人民币)
-            Utils.safe_click(locator.query.button_确定_币种)
-            time.sleep(0.5)
     
-            Utils.safe_click(locator.query.button_提交查询)
+    # ==================== 条件执行查找 ==================== 
+    def run_queries(self):
+        date_ranges = Utils.split_date_range()
+        # # 测试
+        # date_ranges = date_ranges = [(datetime(2024, 11, 11).date(), datetime(2024, 12, 31).date()),(datetime(2025, 1, 1).date(), datetime(2025, 1, 10).date())]
+        total = len(date_ranges)
 
-        except Exception as e:
-            logger.error(f"查询序时账失败：{e}")
-            raise
+        logger.info(f"本次需要执行 {total} 段查询")
+        
+        for idx, (start_date, end_date) in enumerate(date_ranges, start=1):
+            if idx != 1:
+                logger.info("刷新等待 6 秒...")
+                elem = cc.find_element(locator.download.p_序时账)
+                elem.click("right")
+                UI.safe_click(locator.download.div_刷新)
+                time.sleep(6)
+            logger.info(f"开始第 {idx} 段查询：{start_date} 至 {end_date}")
+
+            self.run_query(start_date, end_date)
+            logger.info("查询完成，正在导出 Excel...")
+
+            self.save_to_excel()
+            logger.info(f"第 {idx} 段导出完成")
+        logger.info("所有查询与导出已完成。")
 
     # ==================== 导出 Excel ==================== 
     def save_to_excel(self):
         try:
-            Utils.wait_loading(locator.download.div_加载中)
-        
+            UI.wait_loading(locator.download.div_加载中)
             logger.info("正在导出序时账为 Excel ...")
-            Utils.safe_click(locator.download.button_导出)
-            Utils.safe_click(locator.download.li_导出excel)
-            Utils.safe_click(locator.download.span_原始数据导出)
-            Utils.safe_click(locator.download.button_确定导出)
+            UI.safe_click(locator.download.button_导出)
+            UI.safe_click(locator.download.li_导出excel)
+            UI.safe_click(locator.download.span_原始数据导出)
+            UI.safe_click(locator.download.button_确定导出)
 
             filename = f"序时账_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx"
             full_path = os.path.join(self.downloads_dir, filename)
 
-            Utils.wait_appear_strict(locator.download.window_另存为)
-
-            Utils.safe_input(locator.download.win_input_文件名, full_path)
+            UI.wait_appear_strict(locator.download.window_另存为)
+            UI.safe_input(locator.download.win_input_文件名, full_path)
             time.sleep(1)
-            Utils.safe_click(locator.download.win_button_保存)
+            UI.safe_click(locator.download.win_button_保存)
+            UI.file_ready(full_path)
             logger.info(f"Excel 已成功保存到：{full_path}")
             return full_path
         except Exception as e:
@@ -138,32 +113,61 @@ class Browser:
         except Exception as e:
             logger.error(f"关闭浏览器时发生异常：{e}")
 
-    
-    # ==================== 条件执行查找 ==================== 
-    def run_all_queries(self):
-        date_ranges = Utils.split_date_range()
-        # # 测试
-        # date_ranges = date_ranges = [(datetime(2024, 11, 11).date(), datetime(2024, 12, 31).date()),(datetime(2025, 1, 1).date(), datetime(2025, 1, 10).date())]
-        total = len(date_ranges)
 
-        logger.info(f"本次需要执行 {total} 段查询")
-        
-        for idx, (start_date, end_date) in enumerate(date_ranges, start=1):
-            if idx != 1:
-                logger.info("刷新等待 6 秒...")
-                elem = cc.find_element(locator.download.p_序时账)
-                elem.click("right")
-                Utils.safe_click(locator.download.div_刷新)
-                time.sleep(6)
+    # ==================== 执行查询序时账 ==================== 
+    def run_query(self, start_date, end_date):
+        try:
+            time.sleep(5)
+            logger.info("正在筛选账簿列表...")
+            self.select_ledgers()
 
-            logger.info(f"开始第 {idx} 段查询：{start_date} 至 {end_date}")
+            logger.info("正在填写查找日期范围...")
+            self.fill_date_range(start_date, end_date)
 
-            # 执行查询
-            self.run_query(start_date, end_date)
-            logger.info("查询完成，正在导出 Excel...")
+            logger.info("正在筛选会计科目...")
+            self.select_subjects()
 
-            # 导出
-            self.save_to_excel()
-            logger.info(f"第 {idx} 段导出完成")
-            
-        logger.info("所有查询与导出已完成。")
+            logger.info("正在选择币种...")
+            self.select_currency()
+
+            logger.info("正在提交查询...")
+            self.submit_query()
+        except Exception as e:
+            logger.error(f"查询序时账失败：{e}")
+            raise
+
+
+    def select_ledgers(self):
+        UI.safe_click(locator.query.button_查询)
+        UI.safe_click(locator.query.账簿勾选)
+        time.sleep(0.5)
+        cc.find_element(locator.query.tab_我的收藏).double_click()
+        time.sleep(2)
+        UI.safe_click(locator.query.button_全部选择)
+        UI.safe_click(locator.query.button_确定)
+
+    def fill_date_range(self, start_date, end_date):
+        UI.safe_click(locator.query.锚点_今天)
+        UI.safe_input(locator.query.input_开始日期, start_date.strftime("%Y-%m-%d"))
+        UI.safe_input(locator.query.input_结束日期, end_date.strftime("%Y-%m-%d"))
+        cc.send_hotkey("{ENTER}")
+        UI.safe_click(locator.query.锚点_期间)
+
+    def select_subjects(self):
+        UI.safe_click(locator.query.div_会计科目)
+        UI.safe_click(locator.query.div_会计科目_介于)
+        UI.safe_input(locator.query.会计科目_编码名称1, "主营业务收入")
+        UI.safe_input(locator.query.会计科目_编码名称2, "以前年度损益调整")
+        cc.send_hotkey("{ENTER}")
+        time.sleep(0.5)
+        UI.safe_click(locator.query.span_显示对方科目)
+        UI.safe_click(locator.query.span_全景查询)
+
+    def select_currency(self):
+        UI.safe_click(locator.query.div_币种范围)
+        UI.safe_click(locator.query.li_人民币)
+        UI.safe_click(locator.query.button_确定_币种)
+
+    def submit_query(self):
+        UI.click_and_wait(locator.query.button_提交查询, locator.download.button_导出)
+

@@ -6,7 +6,7 @@ from datetime import datetime, timedelta
 from log import logger
 
 
-class Utils:
+class UI:
 
     @staticmethod
     def safe_input(locator, text, timeout=3, retry=3, sleep=1):
@@ -28,8 +28,19 @@ class Utils:
                     pc.copy(text)
                     time.sleep(0.1)
                     elem.send_hotkey("^v")
-                    time.sleep(0.2)
-                    return True
+                    time.sleep(0.3)
+                    # 校验数据正确性
+                    try:
+                        val = elem.get_text()
+                    except:
+                        val = ""
+
+                    if val and str(val).strip() == str(text).strip():
+                        return True
+                    else:
+                        logger.warning(f"[safe_input] 输入校验失败，第{attempt}次，实际值：{val}，期望：{text}")
+                        time.sleep(sleep)
+                        continue
                 except:
                     logger.warning(f"[safe_input] 第 {attempt}/{retry} 次输入失败：{locator}")
                     time.sleep(sleep)
@@ -69,16 +80,7 @@ class Utils:
             time.sleep(sleep)
         raise Exception(f"[safe_click] 点击失败：无法找到元素 {locator}，累计尝试 {retry} 次")
 
-    @staticmethod
-    def kill_chrome():
-        """
-        强制关闭所有 Chrome 进程（用于自动化前清理环境）
-        """
-        try:
-            subprocess.call("taskkill /F /IM chrome.exe", shell=True)
-            time.sleep(1)
-        except:
-            pass
+
 
     @staticmethod
     def wait_loading(locator, timeout=60, interval=3):
@@ -129,7 +131,77 @@ class Utils:
             if now >= next_log_time:
                 logger.info(f"[wait_appear_strict] 等待中... 已等待 {elapsed}s")
                 next_log_time += interval
+    
+    @staticmethod
+    def click_and_wait(click_locator, appear_locator, timeout=10):
+        """
+        点击控件 + 等待目标控件出现，用于关键跳转动作。
+        """
+        UI.safe_click(click_locator)
+        elem = cc.wait_appear(appear_locator, wait_timeout=timeout)
+        if elem:
+            return True
+        raise Exception(f"[click_and_wait] 点击后未出现目标控件：{appear_locator}")
+    
+    @staticmethod
+    def file_ready(path, retry=5, sleep=1):
+        """
+        检查文件是否存在/可读（用于下载/导出后）
+        """
+        import os
 
+        for i in range(retry):
+            if os.path.exists(path):
+                try:
+                    if os.path.getsize(path) > 0:
+                        return True
+                except:
+                    pass
+            time.sleep(sleep)
+        raise Exception(f"[file_ready] 文件未成功生成：{path}")
+
+
+    
+class Utils:
+    
+    @staticmethod
+    def retry(max_retry=3, delay=3):
+        """
+        通用重试装饰器：
+        - 捕获异常，记录日志
+        - 每次失败后强制关闭 Chrome，重新来一轮
+        - 重试 max_retry 次后仍失败则抛出异常
+        """
+        def decorator(func):
+            def wrapper(*args, **kwargs):
+                for attempt in range(1, max_retry + 1):
+                    try:
+                        return func(*args, **kwargs)
+                    except Exception as e:
+                        logger.error(f"[retry] 第 {attempt}/{max_retry} 次执行失败：{e}")
+                        # --- 强制关闭所有 Chrome ---
+                        try:
+                            Utils.kill_chrome()
+                            logger.info("[retry] 已强制关闭 Chrome 进程，准备重试...")
+                        except:
+                            pass
+
+                        if attempt == max_retry:
+                            raise
+                        time.sleep(delay)
+            return wrapper
+        return decorator
+
+    @staticmethod
+    def kill_chrome():
+        """
+        强制关闭所有 Chrome 进程（用于自动化前清理环境）
+        """
+        try:
+            subprocess.call("taskkill /F /IM chrome.exe", shell=True)
+            time.sleep(1)
+        except:
+            pass
 
     @staticmethod
     def split_date_range():
@@ -147,31 +219,4 @@ class Utils:
         # 跨年（2025-11-11 ~ 2026-01-10：[(2025-11-11, 2025-12-31), (2026-01-01, 2026-01-10)]
         first_end = datetime(start_date.year, 12, 31).date()
         second_start = datetime(end_date.year, 1, 1).date()
-        return [
-            (start_date, first_end),
-            (second_start, end_date)
-        ]
-    
-
-    @staticmethod
-    def retry(max_retry=3, delay=3):
-        def decorator(func):
-            def wrapper(*args, **kwargs):
-                for attempt in range(1, max_retry + 1):
-                    try:
-                        return func(*args, **kwargs)
-                    except Exception as e:
-                        logger.error(f"[retry] 第 {attempt}/{max_retry} 次执行失败：{e}")
-
-                        # --- 强制关闭所有 Chrome ---
-                        try:
-                            Utils.kill_chrome()
-                            logger.info("[retry] 已强制关闭 Chrome 进程，准备重试...")
-                        except:
-                            pass
-
-                        if attempt == max_retry:
-                            raise
-                        time.sleep(delay)
-            return wrapper
-        return decorator
+        return [(start_date, first_end),(second_start, end_date)]

@@ -10,11 +10,12 @@ def run():
     
     obj.goto_query()
 
-    obj.run_all_queries()
+    obj.run_queries()
+
+    # # TODO: 解析入库
 
     obj.close()
 
-    # TODO: 解析入库
 
 if __name__ == "__main__":
     try:
