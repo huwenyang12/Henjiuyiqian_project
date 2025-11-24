@@ -149,3 +149,25 @@ def split_date_range():
         (start_date, first_end),
         (second_start, end_date)
     ]
+
+def retry(max_retry=3, delay=3):
+    def decorator(func):
+        def wrapper(*args, **kwargs):
+            for attempt in range(1, max_retry + 1):
+                try:
+                    return func(*args, **kwargs)
+                except Exception as e:
+                    logger.error(f"[retry] 第 {attempt}/{max_retry} 次执行失败：{e}")
+
+                    # --- 强制关闭所有 Chrome ---
+                    try:
+                        kill_chrome()
+                        logger.info("[retry] 已强制关闭 Chrome 进程，准备重试...")
+                    except:
+                        pass
+
+                    if attempt == max_retry:
+                        raise
+                    time.sleep(delay)
+        return wrapper
+    return decorator

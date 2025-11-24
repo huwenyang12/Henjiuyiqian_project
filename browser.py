@@ -39,7 +39,10 @@ class Browser:
             safe_click(locator.login.button_登录)
             time.sleep(2)
             ele_logo_after = cc.wait_appear(locator.login.Logo, wait_timeout=5)
-            logger.info("登录成功!" if ele_logo_after else "登录失败!")
+            if ele_logo_after: 
+                logger.info("登录成功！")
+            else:
+                raise Exception("登录失败：未检测到主页面Logo")
         except Exception as e:
             logger.error(f"进入登录失败：{e}")
             raise
