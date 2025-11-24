@@ -66,7 +66,7 @@ class Browser:
             # TODO: 账簿少一个 00030-0005
             safe_click(locator.query.button_查询)
             safe_click(locator.query.账簿勾选)
-            time.sleep(1)
+            time.sleep(0.5)
             cc.find_element(locator.query.tab_我的收藏).double_click()
             time.sleep(2)
             safe_click(locator.query.button_全部选择)
@@ -75,10 +75,9 @@ class Browser:
             safe_click(locator.query.锚点_今天)
             safe_input(locator.query.input_开始日期, start_date.strftime("%Y-%m-%d"))
             safe_input(locator.query.input_结束日期, end_date.strftime("%Y-%m-%d"))
-            time.sleep(1)
+            time.sleep(0.5)
             cc.send_hotkey("{ENTER}")
             safe_click(locator.query.锚点_期间)
-
 
             logger.info("正在筛选会计科目...")
             safe_click(locator.query.div_会计科目)
@@ -86,10 +85,18 @@ class Browser:
             safe_input(locator.query.会计科目_编码名称1,"主营业务收入")
             safe_input(locator.query.会计科目_编码名称2,"以前年度损益调整")
             cc.send_hotkey("{ENTER}")
-            time.sleep(1)
+            time.sleep(0.5)
+
             safe_click(locator.query.span_显示对方科目)
             safe_click(locator.query.span_全景查询)
-
+            time.sleep(0.5)
+            
+            logger.info("正在选择币种范围...")
+            safe_click(locator.query.div_币种范围)
+            safe_click(locator.query.li_人民币)
+            safe_click(locator.query.button_确定_币种)
+            time.sleep(0.5)
+    
             safe_click(locator.query.button_提交查询)
 
         except Exception as e:
@@ -150,9 +157,11 @@ class Browser:
                 time.sleep(6)
 
             logger.info(f"开始第 {idx} 段查询：{start_date} 至 {end_date}")
+
             # 执行查询
             self.run_query(start_date, end_date)
             logger.info("查询完成，正在导出 Excel...")
+
             # 导出
             self.save_to_excel()
             logger.info(f"第 {idx} 段导出完成")

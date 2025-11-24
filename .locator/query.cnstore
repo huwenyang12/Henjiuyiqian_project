@@ -2165,6 +2165,324 @@
 					"value": ""
 				}
 			}
+		},
+		{
+			"id": "5ecf1369-b473-43a2-b8cd-29a217e5c064",
+			"name": "button_确定_币种",
+			"filePath": "15b193e1-fca6-4e58-acbf-1005f2c7da02.jpg",
+			"content": {
+				"automationType": "Chrome",
+				"processName": {
+					"value": "chrome"
+				},
+				"filePath": {
+					"value": "chrome.exe"
+				},
+				"version": {
+					"value": "1.3"
+				},
+				"childControls": [
+					{
+						"identifier": {
+							"role": {
+								"value": "window"
+							},
+							"title": {
+								"value": "北京很久以前餐饮管理有限公司"
+							},
+							"url": {
+								"value": "https://c1.yonyoucloud.com/",
+								"excluded": true
+							},
+							"className": {
+								"value": "Chrome_WidgetWin_1"
+							},
+							"controlMetaType": "Tab"
+						},
+						"childControls": [
+							{
+								"identifier": {
+									"tag": {
+										"value": "BUTTON"
+									},
+									"class": {
+										"value": "wui-button wui-button-primary wui-button-sm",
+										"excluded": true
+									},
+									"type": {
+										"value": "button",
+										"excluded": true
+									},
+									"ancestorId": {
+										"value": "f863b523-7690-4cfc-9f37-c0e926c05ce4",
+										"excluded": true
+									},
+									"ancestorClass": {
+										"value": "bottomButtons popover-bottom-buttons",
+										"excluded": true
+									},
+									"isLeaf": {
+										"value": "0",
+										"excluded": true
+									},
+									"cssSelector": {
+										"value": "body>div>div>div>div>div>div>div>div>div>div>div>section>section>main>div>div>div>div>div>div>div>div>div>div>div>div>div>div>span>button",
+										"excluded": true
+									},
+									"sInfo": {
+										"value": "确定"
+									},
+									"tableRow": {
+										"value": "-1",
+										"excluded": true
+									},
+									"tableCol": {
+										"value": "-1",
+										"excluded": true
+									},
+									"controlMetaType": "Web",
+									"index": {
+										"value": "1",
+										"excluded": true
+									},
+									"locale": {
+										"isCustom": true,
+										"value": "zh_CN",
+										"operator": "equals",
+										"excluded": true
+									},
+									"layout": {
+										"isCustom": true,
+										"value": "horizontal",
+										"operator": "equals",
+										"excluded": true
+									},
+									"dir": {
+										"isCustom": true,
+										"value": "ltr",
+										"operator": "equals",
+										"excluded": true
+									},
+									"fieldid": {
+										"isCustom": true,
+										"value": "040b50e7-daea-4d59-833a-2f7c73d7e194-simple-filter-0-selectControl_btn",
+										"operator": "equals",
+										"excluded": true
+									}
+								},
+								"childControls": [],
+								"excluded": false
+							}
+						],
+						"excluded": false
+					}
+				],
+				"parameters": {
+					"excluded": true,
+					"operator": "equals",
+					"value": ""
+				}
+			}
+		},
+		{
+			"id": "9e7af586-22ab-4114-89a2-80a4608d4d19",
+			"name": "div_币种范围",
+			"filePath": "d9949924-e3f3-40c5-ad92-ff42c4895bae.jpg",
+			"content": {
+				"automationType": "Chrome",
+				"processName": {
+					"value": "chrome"
+				},
+				"filePath": {
+					"value": "chrome.exe"
+				},
+				"version": {
+					"value": "1.3"
+				},
+				"childControls": [
+					{
+						"identifier": {
+							"role": {
+								"value": "window"
+							},
+							"title": {
+								"value": "北京很久以前餐饮管理有限公司"
+							},
+							"url": {
+								"value": "https://c1.yonyoucloud.com/",
+								"excluded": true
+							},
+							"className": {
+								"value": "Chrome_WidgetWin_1"
+							},
+							"controlMetaType": "Tab"
+						},
+						"childControls": [
+							{
+								"identifier": {
+									"tag": {
+										"value": "DIV",
+										"excluded": true
+									},
+									"class": {
+										"value": "wui-select-selector",
+										"excluded": true
+									},
+									"ancestorId": {
+										"value": "f863b523-7690-4cfc-9f37-c0e926c05ce4",
+										"excluded": true
+									},
+									"ancestorClass": {
+										"value": "wui-select wui-select-md wui-select-multiple wui-select-allow-cl*",
+										"excluded": true
+									},
+									"isLeaf": {
+										"value": "0",
+										"excluded": true
+									},
+									"cssSelector": {
+										"value": "body>div>div>div>div>div>div>div>div>div>div>div>section>section>main>div>div>div>div>div>div>div>div>div>div>div>div>div>div>div>div>div>div",
+										"excluded": true
+									},
+									"tableRow": {
+										"value": "-1",
+										"excluded": true
+									},
+									"tableCol": {
+										"value": "-1",
+										"excluded": true
+									},
+									"controlMetaType": "Web",
+									"index": {
+										"value": "9",
+										"excluded": false
+									},
+									"id": {
+										"excluded": true,
+										"value": "1"
+									},
+									"xPath": {
+										"excluded": false,
+										"value": "//input[contains(@class,'wui-select-selection-search-input')]"
+									}
+								},
+								"childControls": [],
+								"excluded": false
+							}
+						],
+						"excluded": false
+					}
+				],
+				"parameters": {
+					"excluded": true,
+					"operator": "equals",
+					"value": ""
+				}
+			}
+		},
+		{
+			"id": "d26c56fc-79c0-40ce-b693-d7bc386ad09f",
+			"name": "li_人民币",
+			"filePath": "3f4f747a-7248-42d5-9ccf-1eb55ddce032.jpg",
+			"content": {
+				"automationType": "Chrome",
+				"processName": {
+					"value": "chrome"
+				},
+				"filePath": {
+					"value": "chrome.exe"
+				},
+				"version": {
+					"value": "1.3"
+				},
+				"childControls": [
+					{
+						"identifier": {
+							"role": {
+								"value": "window"
+							},
+							"title": {
+								"value": "北京很久以前餐饮管理有限公司"
+							},
+							"url": {
+								"value": "https://c1.yonyoucloud.com/",
+								"excluded": true
+							},
+							"className": {
+								"value": "Chrome_WidgetWin_1"
+							},
+							"controlMetaType": "Tab"
+						},
+						"childControls": [
+							{
+								"identifier": {
+									"tag": {
+										"value": "LI"
+									},
+									"class": {
+										"value": "option-item  ",
+										"excluded": true
+									},
+									"ancestorId": {
+										"value": "f863b523-7690-4cfc-9f37-c0e926c05ce4",
+										"excluded": true
+									},
+									"ancestorClass": {
+										"value": "xui-select-ul",
+										"excluded": true
+									},
+									"isLeaf": {
+										"value": "0",
+										"excluded": true
+									},
+									"cssSelector": {
+										"value": "body>div>div>div>div>div>div>div>div>div>div>div>section>section>main>div>div>div>div>div>div>div>div>div>div>div>div>div>div>ul>li",
+										"excluded": true
+									},
+									"sInfo": {
+										"value": "人民币",
+										"excluded": true
+									},
+									"tableRow": {
+										"value": "-1",
+										"excluded": true
+									},
+									"tableCol": {
+										"value": "-1",
+										"excluded": true
+									},
+									"title": {
+										"value": "人民币"
+									},
+									"controlMetaType": "Web",
+									"index": {
+										"value": "1",
+										"excluded": true
+									},
+									"data-key": {
+										"isCustom": true,
+										"value": "2348930061397131352-人民币",
+										"operator": "equals",
+										"excluded": true
+									},
+									"data-idx": {
+										"isCustom": true,
+										"value": "0",
+										"operator": "equals",
+										"excluded": true
+									},
+									"fieldid": {
+										"isCustom": true,
+										"value": "040b50e7-daea-4d59-833a-2f7c73d7e194-simple-filter-0-selectControl__option_0",
+										"operator": "equals",
+										"excluded": true
+									}
+								}
+							}
+						]
+					}
+				]
+			}
 		}
 	]
 }
