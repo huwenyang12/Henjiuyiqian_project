@@ -211,13 +211,19 @@ class Utils:
     def split_date_range():
         """
         返回日期区间列表：
+        - 开始日期不能早于 2025-11-01
         - 不跨年：[(start, end)]
         - 跨年：[(start, 当年12-31), (次年1-01, end)]
         """
-        today = datetime.today()
-        start = today - timedelta(days=60)
-        start_date = start.date()
-        end_date = today.date()
+        today = datetime.today().date()
+        raw_start = today - timedelta(days=60)
+
+        # 固定禁止查询的最小日期
+        min_start = datetime(2025, 11, 1).date()
+        
+        start_date = max(raw_start, min_start)
+        end_date = today
+
         if start_date.year == end_date.year:
             return [(start_date, end_date)]
         # 跨年（2025-11-11 ~ 2026-01-10：[(2025-11-11, 2025-12-31), (2026-01-01, 2026-01-10)]
