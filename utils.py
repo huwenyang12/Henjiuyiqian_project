@@ -172,32 +172,29 @@ class UI:
 class Utils:
     
     @staticmethod
-    def retry(max_retry=3, delay=3):
+    def retry(func):
         """
-        通用重试装饰器：
-        - 捕获异常，记录日志
-        - 每次失败后强制关闭 Chrome，重新来一轮
-        - 重试 max_retry 次后仍失败则抛出异常
+        通用重试装饰器
         """
-        def decorator(func):
-            def wrapper(*args, **kwargs):
-                for attempt in range(1, max_retry + 1):
+        max_retry = 3
+        delay = 3
+        def wrapper(*args, **kwargs):
+            for attempt in range(1, max_retry + 1):
+                try:
+                    return func(*args, **kwargs)
+                except Exception as e:
+                    logger.error(f"[retry] 第 {attempt}/{max_retry} 次执行失败：{e}")
+                    # 强制关闭 Chrome
                     try:
-                        return func(*args, **kwargs)
-                    except Exception as e:
-                        logger.error(f"[retry] 第 {attempt}/{max_retry} 次执行失败：{e}")
-                        # --- 强制关闭所有 Chrome ---
-                        try:
-                            Utils.kill_chrome()
-                            logger.info("[retry] 已强制关闭 Chrome 进程，准备重试...")
-                        except:
-                            pass
+                        Utils.kill_chrome()
+                    except:
+                        pass
+                    if attempt == max_retry:
+                        raise
+                    logger.info("[retry] 已强制关闭 Chrome 进程，准备重试...")
+                    time.sleep(delay)
+        return wrapper
 
-                        if attempt == max_retry:
-                            raise
-                        time.sleep(delay)
-            return wrapper
-        return decorator
 
     @staticmethod
     def kill_chrome():
@@ -227,3 +224,23 @@ class Utils:
         first_end = datetime(start_date.year, 12, 31).date()
         second_start = datetime(end_date.year, 1, 1).date()
         return [(start_date, first_end),(second_start, end_date)]
+    
+    @staticmethod
+    def task_log(func):
+        """
+        任务日志
+        """
+        def wrapper(*args, **kwargs):
+            action = func.__name__
+            bar = "=" * 10
+            logger.info(f"{bar}【{action}】开始{bar}")
+            start = time.time()
+            try:
+                result = func(*args, **kwargs)
+                cost = round(time.time() - start, 2)
+                logger.info(f"{bar}【{action}】结束（耗时 {cost}s）{bar}")
+                return result
+            except Exception as e:
+                logger.error(f"{bar}【{action}】失败：{e}{bar}")
+                raise
+        return wrapper

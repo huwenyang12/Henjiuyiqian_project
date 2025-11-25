@@ -2,7 +2,8 @@ from browser import Browser
 from log import logger
 from utils import Utils
 
-@Utils.retry()
+@Utils.retry
+@Utils.task_log
 def run():
     obj = Browser()
 
@@ -19,9 +20,6 @@ def run():
 
 if __name__ == "__main__":
     try:
-        logger.info("")
-        logger.info("【开始执行任务】")
         run()
-        logger.info("【任务执行结束】")
     except Exception as e:
-        logger.error(f"【任务执行失败】：{e}")
+        logger.error(f"【主流程运行失败】：{e}")
