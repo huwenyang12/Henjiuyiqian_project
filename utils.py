@@ -133,15 +133,22 @@ class UI:
                 next_log_time += interval
     
     @staticmethod
-    def click_and_wait(click_locator, appear_locator, timeout=10):
+    def click_and_wait(click_locator, appear_locator, timeout=10, retry=3, sleep=1):
         """
-        点击控件 + 等待目标控件出现，用于关键跳转动作。
+        点击控件 + 等待目标控件出现
+        - 若点击后目标控件未出现，则自动再次点击（retry 次）
         """
-        UI.safe_click(click_locator)
-        elem = cc.wait_appear(appear_locator, wait_timeout=timeout)
-        if elem:
-            return True
-        raise Exception(f"[click_and_wait] 点击后未出现目标控件：{appear_locator}")
+        for attempt in range(1, retry + 1):
+            UI.safe_click(click_locator)
+            elem = cc.wait_appear(appear_locator, wait_timeout=timeout)
+            if elem:
+                return True
+            logger.warning(
+                f"[click_and_wait] 点击后目标未出现，第 {attempt}/{retry} 次点击无效：{appear_locator}"
+            )
+            time.sleep(sleep)
+        raise Exception(f"[click_and_wait] 多次点击后目标控件仍未出现：{appear_locator}")
+
     
     @staticmethod
     def file_ready(path, retry=5, sleep=1):

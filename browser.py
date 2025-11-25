@@ -1,5 +1,5 @@
 from clicknium import clicknium as cc, locator, ui
-from datetime import datetime, timedelta
+from datetime import datetime
 import yaml
 import os
 import time
@@ -141,7 +141,7 @@ class Browser:
         UI.safe_click(locator.query.button_查询)
         UI.safe_click(locator.query.账簿勾选)
         time.sleep(0.5)
-        cc.find_element(locator.query.tab_我的收藏).double_click()
+        UI.click_and_wait(locator.query.tab_我的收藏, locator.query.button_全部选择)
         time.sleep(2)
         UI.safe_click(locator.query.button_全部选择)
         UI.safe_click(locator.query.button_确定)
