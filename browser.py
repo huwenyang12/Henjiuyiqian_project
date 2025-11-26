@@ -1,23 +1,20 @@
 from clicknium import clicknium as cc, locator, ui
 from datetime import datetime
-import yaml
-import os
-import time
+import yaml, os, time
 from log import logger 
-
 from utils import Utils, UI
 
 CONFIG_FILE = os.path.join(os.path.dirname(__file__), "config.yaml")
-
 with open(CONFIG_FILE, "r", encoding="utf-8") as f:
     cfg = yaml.safe_load(f)
 
 class Browser:
-
     def __init__(self):
         self.url = cfg["system"]["base_url"]
-        self.downloads_dir = cfg["system"]["download_dir"]
-        os.makedirs(self.downloads_dir, exist_ok=True)
+        # 添加执行目录
+        ts = datetime.now().strftime("%Y%m%d%H%M%S")
+        self.task_folder = os.path.join(cfg["system"]["download_dir"], ts)
+        os.makedirs(self.task_folder, exist_ok=True)
 
     # ==================== 执行登录操作 ==================== 
     def login(self):
@@ -28,7 +25,6 @@ class Browser:
             logger.info("正在打开控制台网页...")
             self.tab = cc.chrome.open(self.url)
             UI.try_click(locator.login.button_接受,timeout=2)
-
             ele_logo = cc.wait_appear(locator.login.Logo, wait_timeout=1)
             if ele_logo:
                 logger.info("已在控制台页面，无需登录")
@@ -56,10 +52,11 @@ class Browser:
     
     # ==================== 条件执行查找 ==================== 
     def run_queries(self):
-        date_ranges = Utils.split_date_range()
-        # # 测试
-        # date_ranges = date_ranges = [(datetime(2024, 11, 11).date(), datetime(2024, 12, 31).date()),(datetime(2025, 1, 1).date(), datetime(2025, 1, 10).date())]
+        # date_ranges = Utils.split_date_range()
+        # test
+        date_ranges = date_ranges = [(datetime(2024, 12, 21).date(), datetime(2024, 12, 31).date()),(datetime(2025, 1, 1).date(), datetime(2025, 1, 10).date())]
         total = len(date_ranges)
+        result_list = []
 
         logger.info(f"本次需要执行 {total} 段查询")
         
@@ -70,15 +67,25 @@ class Browser:
                 elem.click("right")
                 UI.safe_click(locator.download.div_刷新)
                 time.sleep(6)
+
             logger.info(f"开始第 {idx} 段查询：{start_date} 至 {end_date}")
-
             self.run_query(start_date, end_date)
+
             logger.info("查询完成，正在导出 Excel...")
-
-            self.save_to_excel()
+            file_path = self.save_to_excel()
             logger.info(f"第 {idx} 段导出完成")
-        logger.info("所有查询与导出已完成。")
 
+            download_time = os.path.basename(file_path).replace(".xlsx", "")
+            result_list.append({
+                "data_folder": self.task_folder,
+                "download_time": download_time,
+                "start_date": start_date.strftime("%Y-%m-%d"),
+                "end_date": end_date.strftime("%Y-%m-%d")
+            })
+
+        logger.info("所有查询与导出已完成。")
+        return result_list
+    
     # ==================== 导出 Excel ==================== 
     def save_to_excel(self):
         try:
@@ -88,10 +95,8 @@ class Browser:
             UI.safe_click(locator.download.li_导出excel)
             UI.safe_click(locator.download.span_原始数据导出)
             UI.safe_click(locator.download.button_确定导出)
-
-            filename = f"序时账_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx"
-            full_path = os.path.join(self.downloads_dir, filename)
-
+            filename = f"{datetime.now().strftime('%Y%m%d%H%M%S')}.xlsx"
+            full_path = os.path.join(self.task_folder, filename)
             UI.wait_appear_strict(locator.download.window_另存为)
             UI.safe_input(locator.download.win_input_文件名, full_path)
             time.sleep(1)
@@ -113,29 +118,23 @@ class Browser:
         except Exception as e:
             logger.error(f"关闭浏览器时发生异常：{e}")
 
-
     # ==================== 执行查询序时账 ==================== 
     def run_query(self, start_date, end_date):
         try:
             time.sleep(5)
             logger.info("正在筛选账簿列表...")
             self.select_ledgers()
-
             logger.info("正在填写查找日期范围...")
             self.fill_date_range(start_date, end_date)
-
             logger.info("正在筛选会计科目...")
             self.select_subjects()
-
             logger.info("正在选择币种...")
             self.select_currency()
-
             logger.info("正在提交查询...")
             self.submit_query()
         except Exception as e:
             logger.error(f"查询序时账失败：{e}")
             raise
-
 
     def select_ledgers(self):
         UI.safe_click(locator.query.button_查询)

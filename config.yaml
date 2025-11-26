@@ -1,7 +1,7 @@
 # 系统基础配置
 system:
   base_url: "https://c1.yonyoucloud.com/"
-  download_dir: "D:\\下载\\序时帐导出_Excel"
+  download_dir: "D:\\qcyq\\很久以前"
 
 # 登录信息
 login:

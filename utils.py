@@ -1,5 +1,5 @@
 from clicknium import clicknium as cc
-import time
+import time, os
 import subprocess
 import pyperclip as pc
 from datetime import datetime, timedelta
@@ -7,7 +7,6 @@ from log import logger
 
 
 class UI:
-
     @staticmethod
     def safe_input(locator, text, timeout=3, retry=3, sleep=1):
         """
@@ -49,7 +48,6 @@ class UI:
                 time.sleep(sleep)
         raise Exception(f"[safe_input] 输入失败：无法找到或输入 {locator}，累计尝试 {retry} 次")
 
-
     @staticmethod
     def try_click(locator, timeout=3): 
         """ 
@@ -61,7 +59,6 @@ class UI:
             time.sleep(1) 
             return True 
         return False
-
 
     @staticmethod
     def safe_click(locator, timeout=5, retry=3, sleep=2):
@@ -80,8 +77,6 @@ class UI:
             time.sleep(sleep)
         raise Exception(f"[safe_click] 点击失败：无法找到元素 {locator}，累计尝试 {retry} 次")
 
-
-
     @staticmethod
     def wait_loading(locator, timeout=60, interval=3):
         """
@@ -92,7 +87,6 @@ class UI:
         logger.info(f"[wait_loading] 等待加载控件消失...")
         start = time.time()
         next_log_time = start + interval
-
         while True:
             now = time.time()
             elapsed = int(now - start)
@@ -117,7 +111,6 @@ class UI:
         logger.info(f"[wait_appear_strict] 开始等待控件出现...")
         start = time.time()
         next_log_time = start + interval
-
         while True:
             now = time.time()
             elapsed = int(now - start)
@@ -148,15 +141,12 @@ class UI:
             )
             time.sleep(sleep)
         raise Exception(f"[click_and_wait] 多次点击后目标控件仍未出现：{appear_locator}")
-
     
     @staticmethod
     def file_ready(path, retry=5, sleep=1):
         """
         检查文件是否存在/可读（用于下载/导出后）
         """
-        import os
-
         for i in range(retry):
             if os.path.exists(path):
                 try:
@@ -167,10 +157,8 @@ class UI:
             time.sleep(sleep)
         raise Exception(f"[file_ready] 文件未成功生成：{path}")
 
-
     
 class Utils:
-    
     @staticmethod
     def retry(func):
         """
@@ -195,7 +183,6 @@ class Utils:
                     time.sleep(delay)
         return wrapper
 
-
     @staticmethod
     def kill_chrome():
         """
@@ -217,13 +204,10 @@ class Utils:
         """
         today = datetime.today().date()
         raw_start = today - timedelta(days=60)
-
         # 固定禁止查询的最小日期
         min_start = datetime(2025, 11, 1).date()
-        
         start_date = max(raw_start, min_start)
         end_date = today
-
         if start_date.year == end_date.year:
             return [(start_date, end_date)]
         # 跨年（2025-11-11 ~ 2026-01-10：[(2025-11-11, 2025-12-31), (2026-01-01, 2026-01-10)]

@@ -1,6 +1,7 @@
 from browser import Browser
 from log import logger
 from utils import Utils
+from app import main as insert_db
 
 @Utils.retry
 @Utils.task_log
@@ -8,15 +9,16 @@ def run():
     obj = Browser()
 
     obj.login()
-    
     obj.goto_query()
 
-    obj.run_queries()
-
-    # # TODO: 解析入库
+    results  = obj.run_queries()
 
     obj.close()
 
+    for item in results:
+        print("开始入库...")
+        insert_db(**item)
+    logger.info("所有 Excel 已入库完成")
 
 if __name__ == "__main__":
     try:
