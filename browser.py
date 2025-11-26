@@ -52,9 +52,9 @@ class Browser:
     
     # ==================== 条件执行查找 ==================== 
     def run_queries(self):
-        # date_ranges = Utils.split_date_range()
-        # test
-        date_ranges = date_ranges = [(datetime(2024, 12, 21).date(), datetime(2024, 12, 31).date()),(datetime(2025, 1, 1).date(), datetime(2025, 1, 10).date())]
+        date_ranges = Utils.split_date_range()
+        # # test
+        # date_ranges = date_ranges = [(datetime(2024, 12, 21).date(), datetime(2024, 12, 31).date()),(datetime(2025, 1, 1).date(), datetime(2025, 1, 10).date())]
         total = len(date_ranges)
         result_list = []
 

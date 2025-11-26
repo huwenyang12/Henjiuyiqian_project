@@ -38,8 +38,8 @@ def insert_db(params):
     while True:
         if retry_times < 0:
             raise Exception("入库失败，已重试3次")
-        #conn = MySQLdb.connect("localhost", "root", "123456", "bt_console", cursorclass = cors.DictCursor)
-        conn = MySQLdb.connect("rm-2zetkwh4s22am33a0lo.mysql.rds.aliyuncs.com", "esznkj", "esznkj20231027@", "yongyou_data", cursorclass = cors.DictCursor)
+        conn = MySQLdb.connect("localhost", "root", "root", "bt_console", cursorclass = cors.DictCursor)
+        # conn = MySQLdb.connect("rm-2zetkwh4s22am33a0lo.mysql.rds.aliyuncs.com", "esznkj", "esznkj20231027@", "yongyou_data", cursorclass = cors.DictCursor)
         cur = conn.cursor()
 
         try:            
@@ -69,8 +69,8 @@ def remove_repeat_days_db(query_days):
         while True:
             if retry_times < 0:
                 raise Exception("删除重复数据失败，已重试3次")
-            #conn = MySQLdb.connect("localhost", "root", "123456", "bt_console", cursorclass = cors.DictCursor)
-            conn = MySQLdb.connect("rm-2zetkwh4s22am33a0lo.mysql.rds.aliyuncs.com", "esznkj", "esznkj20231027@", "yongyou_data", cursorclass = cors.DictCursor)
+            conn = MySQLdb.connect("localhost", "root", "root", "bt_console", cursorclass = cors.DictCursor)
+            # conn = MySQLdb.connect("rm-2zetkwh4s22am33a0lo.mysql.rds.aliyuncs.com", "esznkj", "esznkj20231027@", "yongyou_data", cursorclass = cors.DictCursor)
             cur = conn.cursor()
             query_sql = 'select * from yongyou_data where year = %s and month = %s and day = %s limit 1'%(query_year, query_month, query_day)
             sql = 'delete from yongyou_data where year = %s and month = %s and day = %s '%(query_year, query_month, query_day)
@@ -107,8 +107,8 @@ def main(data_folder, download_time, start_date, end_date):
         for data_file in data_files:
             f_file = os.path.join(data_folder, data_file)
             if 'part' not in data_file:
-                df = pd.read_excel(f_file, skiprows=7, dtype=str)
-                start_row_index = 9
+                df = pd.read_excel(f_file, skiprows=13, dtype=str)
+                start_row_index = 16
             else:
                 df = pd.read_excel(f_file, skiprows=1, dtype=str)
                 start_row_index = 3
@@ -128,41 +128,30 @@ def main(data_folder, download_time, start_date, end_date):
                 params = []
                 for row_index, row in select_df.iterrows():
                     if pd.isnull(row[0]):
-                        break
-                    main_account = "" if pd.isnull(row[0]) else row[0]
-                    voucher_no = "" if pd.isnull(row[3]) else row[3]
-                    entry_no = "" if pd.isnull(row[4]) else row[4]
-                    summary = "" if pd.isnull(row[5]) else row[5]
-                    subject_code = "" if pd.isnull(row[6]) else row[6]
-                    subject_name = "" if pd.isnull(row[7]) else row[7]
-                    additional = "" if pd.isnull(row[8]) else row[8]
-                    currency = "" if pd.isnull(row[9]) else row[9]
-                    debit_original =  0.0 if pd.isnull(row[10]) else float(row[10])
-                    debit_local =  0.0 if pd.isnull(row[11]) else float(row[11])
-                    credit_original =  0.0 if pd.isnull(row[12]) else float(row[12])
-                    credit_local =  0.0 if pd.isnull(row[13]) else float(row[13])
-                    subject_fee = "" if pd.isnull(row[14]) else row[14] 
-                    verification_info = "" if pd.isnull(row[15]) else row[15]
-                    bill_info = "" if pd.isnull(row[16]) else row[16]
-                    inner_trade_info = "" if pd.isnull(row[17]) else row[17]
-                    maker = "" if pd.isnull(row[18]) else row[18]
-                    if len(row) < 20:
-                        reviewer = ""
-                    else:
-                        reviewer = "" if pd.isnull(row[19]) else row[19]
-                    if len(row) < 21:
-                        accounter = ""
-                    else:
-                        accounter = "" if pd.isnull(row[20]) else row[20]
-                    if len(row) < 22:
-                        signer = ""
-                    else:
-                        signer = "" if pd.isnull(row[21]) else row[21]
-
-                    params.append((uuid.uuid4().hex, create_date, datetime.now(), download_time, main_account, month_dict[int(row[1])],int(row[1]),int(row[2]), voucher_no, 
-                                entry_no, summary, subject_code, subject_name, additional, currency, debit_original, debit_local, credit_original, credit_local, 
-                                subject_fee, verification_info, bill_info, inner_trade_info, maker, reviewer, accounter, signer ))
-                
+                        continue
+                    main_account = "" if pd.isnull(row[2]) else row[2]
+                    bill_date = row[4]  # '2025-11-01'
+                    year, month, day = bill_date.split("-")
+                    voucher_no = "" if pd.isnull(row[5]) else row[5]
+                    entry_no = "" if pd.isnull(row[6]) else row[6]
+                    summary = "" if pd.isnull(row[7]) else row[7]
+                    subject_code = "" if pd.isnull(row[8]) else row[8]
+                    subject_name = "" if pd.isnull(row[9]) else row[9]
+                    additional = "" if pd.isnull(row[53]) else row[53]
+                    currency = "" if pd.isnull(row[55]) else row[55]
+                    debit_original = float(row[59]) if not pd.isnull(row[59]) else 0.0
+                    debit_local    = float(row[60]) if not pd.isnull(row[60]) else 0.0
+                    credit_original = float(row[62]) if not pd.isnull(row[62]) else 0.0
+                    credit_local    = float(row[63]) if not pd.isnull(row[63]) else 0.0
+                    maker = "" if pd.isnull(row[65]) else row[65]
+                    reviewer = "" if pd.isnull(row[66]) else row[66]
+                    accounter = "" if pd.isnull(row[67]) else row[67]
+                    subject_fee = ""
+                    verification_info = ""
+                    bill_info = ""
+                    inner_trade_info = ""
+                    signer = ""
+                    params.append((uuid.uuid4().hex, create_date, datetime.now(), download_time, main_account, year, month, day, voucher_no, entry_no, summary, subject_code, subject_name, additional, currency, debit_original, debit_local, credit_original, credit_local, subject_fee, verification_info, bill_info, inner_trade_info, maker, reviewer, accounter, signer ))
                 insert_db(params)
                 print(f"第{start_row + start_row_index}行到第{end_row + start_row_index - 1}行录入完成")
         # FeiShu().send_message(f"录入数据库完成")
@@ -172,14 +161,14 @@ def main(data_folder, download_time, start_date, end_date):
 
 if __name__ == "__main__":
     
-    datafolder = sys.argv[1]
-    download_time = sys.argv[2]
-    start_date = sys.argv[3]
-    end_date = sys.argv[4]
-    # download_time = '20231103220111' # %Y%m%d%H%M%S
-    # datafolder = r"D:\qcyq\很久以前\20231106153652"
-    # start_date = '2023-08-01'
-    # end_date = '2023-09-30'
+    # datafolder = sys.argv[1]
+    # download_time = sys.argv[2]
+    # start_date = sys.argv[3]
+    # end_date = sys.argv[4]
+    download_time = '20251126120000' # %Y%m%d%H%M%S
+    datafolder = r"D:\qcyq\很久以前\20251126101538"
+    start_date = "2025-11-01"     
+    end_date   = "2025-11-30"
     print("开始入库...")
     main(datafolder, download_time, start_date, end_date)
     print("入库完成")
