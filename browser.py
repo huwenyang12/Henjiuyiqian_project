@@ -11,7 +11,6 @@ with open(CONFIG_FILE, "r", encoding="utf-8") as f:
 class Browser:
     def __init__(self):
         self.url = cfg["system"]["base_url"]
-        # 添加执行目录
         ts = datetime.now().strftime("%Y%m%d%H%M%S")
         self.task_folder = os.path.join(cfg["system"]["download_dir"], ts)
         os.makedirs(self.task_folder, exist_ok=True)
