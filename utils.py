@@ -1,10 +1,14 @@
 from clicknium import clicknium as cc
-import time, os
+import time, os, yaml
 import subprocess
 import pyperclip as pc
 from datetime import datetime, timedelta
 from log import logger
+from recorder_impl import Recorder
 
+CONFIG_FILE = os.path.join(os.path.dirname(__file__), "config.yaml")
+with open(CONFIG_FILE, "r", encoding="utf-8") as f:
+    CONFIG = yaml.safe_load(f)
 
 class UI:
     @staticmethod
@@ -234,3 +238,22 @@ class Utils:
                 logger.error(f"{bar}【{action}】失败：{e}{bar}")
                 raise
         return wrapper
+    
+    @staticmethod
+    def start_recorder():
+        # 视频保存目录
+        video_dir = CONFIG["system"]["video"]
+        os.makedirs(video_dir, exist_ok=True)
+        ts = datetime.now().strftime("%Y%m%d%H%M%S")
+        filepath = os.path.join(video_dir, f"{ts}.mp4")
+        recorder = Recorder(filepath)
+        recorder.start()
+        return recorder
+
+    @staticmethod
+    def stop_recorder(recorder):
+        """
+        停止录屏
+        """
+        if recorder:
+            recorder.stop()

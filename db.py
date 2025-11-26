@@ -10,6 +10,7 @@ import traceback
 import warnings
 from feishu import FeiShu
 import traceback
+from log import logger
 
 
 warnings.filterwarnings('ignore')
@@ -48,7 +49,7 @@ def insert_db(params):
             conn.commit()
             break
         except Exception as e:  
-            print("插入失败，" + traceback.format_exc())
+            logger.error("插入失败，" + traceback.format_exc())
             conn.rollback()
         finally:
             if cur:
@@ -58,7 +59,7 @@ def insert_db(params):
                 conn.close()     
 
 def remove_repeat_days_db(query_days):
-    print("开始删除重复数据...")
+    logger.info("开始删除重复数据...")
     for query_date in query_days:        
         date_parts = query_date.split("-")
         query_year = int(date_parts[0])
@@ -79,12 +80,12 @@ def remove_repeat_days_db(query_days):
                 query_r = cur.execute(query_sql)
                 if query_r == 0 or query_r is None:
                     break                 
-                print(f"正在删除重复数据：{query_date}...")       
+                logger.info(f"正在删除重复数据：{query_date}...")       
                 cur.execute(sql)  
                 conn.commit()
                 break
             except Exception as e:  
-                print("删除重复数据失败，" + traceback.format_exc())
+                logger.error("删除重复数据失败，" + traceback.format_exc())
                 conn.rollback()
             finally:
                 if cur:
@@ -93,7 +94,7 @@ def remove_repeat_days_db(query_days):
                 if conn:
                     conn.close() 
 
-    print("删除重复数据完成")
+    logger.info("删除重复数据完成")
            
 def main(data_folder, download_time, start_date, end_date):
     try:
@@ -114,7 +115,7 @@ def main(data_folder, download_time, start_date, end_date):
                 start_row_index = 3
             
             batch = len(df) // 1000 + 1
-            print(f"文件: {f_file}, 开始分 {batch} 批次录入...")
+            logger.info(f"文件: {f_file}, 开始分 {batch} 批次录入...")
             # FeiShu().send_message(f"文件: {f_file}, 开始分 {batch} 批次录入...")
             for index in range(batch):
                 
@@ -169,6 +170,6 @@ if __name__ == "__main__":
     datafolder = r"D:\qcyq\很久以前\20251126101538"
     start_date = "2025-11-01"     
     end_date   = "2025-11-30"
-    print("开始入库...")
+    logger.info("开始入库...")
     main(datafolder, download_time, start_date, end_date)
-    print("入库完成")
+    logger.info("入库完成")
