@@ -14,8 +14,8 @@ def run_query():
         obj.goto_query()
         return obj.run_queries()
     finally:
-        Utils.stop_recorder(recorder)
         obj.close()
+        Utils.stop_recorder(recorder)
 
 @Utils.task_log
 def main():

@@ -110,8 +110,8 @@ class Browser:
     # ==================== 关闭浏览器 ==================== 
     def close(self):
         try:
-            logger.info(f"浏览器将在 5 秒后关闭...")
-            time.sleep(5)                
+            logger.info(f"浏览器将在 3 秒后关闭...")
+            time.sleep(3)                
             self.tab.close()
             logger.info("浏览器已关闭。")
         except Exception as e:

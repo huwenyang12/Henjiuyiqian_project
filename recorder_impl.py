@@ -1,8 +1,6 @@
 import os
 import subprocess
-import signal
 import time
-from datetime import datetime
 from log import logger
 
 class Recorder:
@@ -66,7 +64,6 @@ class Recorder:
         """
         if not self.proc:
             return
-
         try:
             # 优雅停止
             if self.proc.stdin:
@@ -75,8 +72,6 @@ class Recorder:
                     self.proc.stdin.flush()
                 except:
                     pass
-
-            # 等待 1 秒
             time.sleep(1)
 
             # 强制停止（避免 ffmpeg 自己卡死）
