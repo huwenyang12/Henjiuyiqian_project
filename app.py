@@ -6,19 +6,21 @@ from db import main as insert_db
 @Utils.retry
 @Utils.task_log
 def run():
-    obj = Browser()
+    try:
+        obj = Browser()
 
-    obj.login()
-    obj.goto_query()
+        obj.login()
+        obj.goto_query()
 
-    results  = obj.run_queries()
+        results  = obj.run_queries()
 
-    obj.close()
+        for item in results:
+            print("开始入库...")
+            insert_db(**item)
+        logger.info("所有 Excel 已入库完成")
 
-    for item in results:
-        print("开始入库...")
-        insert_db(**item)
-    logger.info("所有 Excel 已入库完成")
+    finally:
+        obj.close()
 
 if __name__ == "__main__":
     try:

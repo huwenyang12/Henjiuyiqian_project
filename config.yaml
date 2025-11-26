@@ -2,6 +2,8 @@
 system:
   base_url: "https://c1.yonyoucloud.com/"
   download_dir: "D:\\qcyq\\很久以前"
+  video: "D:\\qcyq\\很久以前\\Video"
+
 
 # 登录信息
 login:
