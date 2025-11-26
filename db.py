@@ -95,7 +95,7 @@ def remove_repeat_days_db(query_days):
                     conn.close() 
 
     logger.info("删除重复数据完成")
-           
+
 def main(data_folder, download_time, start_date, end_date):
     try:
         month_dict, query_days = get_year(start_date, end_date)
@@ -115,7 +115,7 @@ def main(data_folder, download_time, start_date, end_date):
                 start_row_index = 3
             
             batch = len(df) // 1000 + 1
-            logger.info(f"文件: {f_file}, 开始分 {batch} 批次录入...")
+            logger.info(f"文件: {f_file}, 本次需录入数量为{len(data_files)}, 开始分 {batch} 批次录入...")
             # FeiShu().send_message(f"文件: {f_file}, 开始分 {batch} 批次录入...")
             for index in range(batch):
                 

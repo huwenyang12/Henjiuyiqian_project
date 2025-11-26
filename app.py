@@ -17,7 +17,6 @@ def run_query():
         obj.close()
         Utils.stop_recorder(recorder)
 
-@Utils.task_log
 def main():
     for item in run_query():
         insert_db(**item)
