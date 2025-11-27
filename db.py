@@ -115,7 +115,7 @@ def main(data_folder, download_time, start_date, end_date):
                 start_row_index = 3
             
             batch = len(df) // 1000 + 1
-            logger.info(f"文件: {f_file}, 本次需录入数量为{len(data_files)}, 开始分 {batch} 批次录入...")
+            logger.info(f"文件: {f_file}, 开始分 {batch} 批次录入...")
             # FeiShu().send_message(f"文件: {f_file}, 开始分 {batch} 批次录入...")
             for index in range(batch):
                 
@@ -154,7 +154,7 @@ def main(data_folder, download_time, start_date, end_date):
                     signer = ""
                     params.append((uuid.uuid4().hex, create_date, datetime.now(), download_time, main_account, year, month, day, voucher_no, entry_no, summary, subject_code, subject_name, additional, currency, debit_original, debit_local, credit_original, credit_local, subject_fee, verification_info, bill_info, inner_trade_info, maker, reviewer, accounter, signer ))
                 insert_db(params)
-                print(f"第{start_row + start_row_index}行到第{end_row + start_row_index - 1}行录入完成")
+                logger.info(f"第{start_row + start_row_index}行到第{end_row + start_row_index - 1}行录入完成")
         # FeiShu().send_message(f"录入数据库完成")
     except:
         # FeiShu().send_message(f"入库失败，{traceback.format_exc()}")

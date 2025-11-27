@@ -5,6 +5,7 @@ import pyperclip as pc
 from datetime import datetime, timedelta
 from log import logger
 from recorder_impl import Recorder
+from PIL import ImageGrab
 
 CONFIG_FILE = os.path.join(os.path.dirname(__file__), "config.yaml")
 with open(CONFIG_FILE, "r", encoding="utf-8") as f:
@@ -242,15 +243,51 @@ class Utils:
     
     @staticmethod
     def start_recorder():
-        video_dir = CONFIG["system"]["video"]
-        os.makedirs(video_dir, exist_ok=True)
-        ts = datetime.now().strftime("%Y%m%d%H%M%S")
-        filepath = os.path.join(video_dir, f"{ts}.mp4")
-        recorder = Recorder(filepath)
-        recorder.start()
-        return recorder
+        """
+        启动录屏
+        """
+        try:
+            video_dir = CONFIG["system"]["video"]
+            os.makedirs(video_dir, exist_ok=True)
+            ts = datetime.now().strftime("%Y%m%d%H%M%S")
+            filepath = os.path.join(video_dir, f"{ts}.mp4")
+            recorder = Recorder(filepath)
+            recorder.filepath = filepath
+            recorder.start()
+            logger.info(f"录屏已启动: {filepath}")
+            return recorder
+        except Exception as e:
+            logger.error(f"录屏启动失败: {e}")
+            raise
+
 
     @staticmethod
     def stop_recorder(recorder):
-        if recorder:
-            recorder.stop()
+        """
+        停止录屏
+        """
+        try:
+            if recorder:
+                recorder.stop()
+                logger.info(f"录屏已结束: {recorder.filepath}")
+        except Exception as e:
+            logger.error(f"录屏停止失败: {e}")
+
+
+    @staticmethod
+    def take_screenshot():
+        """
+        通用异常截图
+        """
+        try:
+            img_dir = CONFIG["system"]["image"]
+            os.makedirs(img_dir, exist_ok=True)
+            ts = datetime.now().strftime("%Y%m%d%H%M%S")
+            filepath = os.path.join(img_dir, f"error_{ts}.png")
+            img = ImageGrab.grab()
+            img.save(filepath)
+            logger.info(f"[screenshot] 截图已保存：{filepath}")
+            return filepath
+        except Exception as e:
+            logger.error(f"[screenshot] 截图失败：{e}")
+            return None

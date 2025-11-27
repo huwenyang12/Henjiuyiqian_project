@@ -1,9 +1,9 @@
 # 系统基础配置
 system:
   base_url: "https://c1.yonyoucloud.com/"
-  download_dir: "D:\\qcyq\\很久以前"
-  video: "D:\\qcyq\\很久以前\\Video"
-
+  download_dir: "D:\\qcyq\\很久以前\\Files"
+  video: "D:\\qcyq\\很久以前\\Videos"
+  image: "D:\\qcyq\\很久以前\\Images"
 
 # 登录信息
 login:

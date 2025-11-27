@@ -13,16 +13,20 @@ def run_query():
         obj.goto_query()
         return obj.run_queries()
     except Exception as e:
-        # 调用异常截图
-        pass
+        Utils.take_screenshot()
+        raise
     finally:
         Utils.stop_recorder(recorder)
         obj.close()
         
 @Utils.task_log
 def main():
-    for item in run_query():
-        insert_db(**item)
+    results = run_query()
+    if not results:
+        logger.info("没有数据需要入库")
+        return
+    item = results[0]
+    insert_db(**item)
     logger.info("所有 Excel 已入库完成")
 
 

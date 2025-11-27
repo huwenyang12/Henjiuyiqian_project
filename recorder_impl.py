@@ -25,63 +25,44 @@ class Recorder:
                 self.ffmpeg = local_ffmpeg
 
     def start(self, fps=20):
-        """
-        启动录屏
-        """
-        try:
-            folder = os.path.dirname(self.file_path)
-            os.makedirs(folder, exist_ok=True)
+        folder = os.path.dirname(self.file_path)
+        os.makedirs(folder, exist_ok=True)
+        cmd = [
+            self.ffmpeg,
+            "-y",
+            "-f", "gdigrab",
+            "-framerate", str(fps),
+            "-i", "desktop",
+            "-vcodec", "libx264",
+            "-preset", "ultrafast",
+            "-pix_fmt", "yuv420p",
+            self.file_path
+        ]
 
-            cmd = [
-                self.ffmpeg,
-                "-y",
-                "-f", "gdigrab",
-                "-framerate", str(fps),
-                "-i", "desktop",
-                "-vcodec", "libx264",
-                "-preset", "ultrafast",
-                "-pix_fmt", "yuv420p",
-                self.file_path
-            ]
+        self.proc = subprocess.Popen(
+            cmd,
+            stdin=subprocess.PIPE,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+            shell=False
+        )
+        return 
 
-            self.proc = subprocess.Popen(
-                cmd,
-                stdin=subprocess.PIPE,
-                stdout=subprocess.DEVNULL,
-                stderr=subprocess.DEVNULL,
-                shell=False
-            )
-
-            logger.info(f"录屏已启动: {self.file_path}")
-
-        except Exception as e:
-            logger.error(f"录屏启动失败: {e}")
-            raise
 
     def stop(self):
-        """
-        停止录屏
-        """
         if not self.proc:
             return
-        try:
-            # 优雅停止
-            if self.proc.stdin:
-                try:
-                    self.proc.stdin.write(b"q\n")
-                    self.proc.stdin.flush()
-                except:
-                    pass
-            time.sleep(1)
-
-            # 强制停止（避免 ffmpeg 自己卡死）
-            if self.proc.poll() is None:
-                self.proc.terminate()
-                time.sleep(0.5)
-            if self.proc.poll() is None:
-                self.proc.kill()
-
-            logger.info(f"录屏已结束: {self.file_path}")
-
-        except Exception as e:
-            logger.error(f"录屏停止失败: {e}")
+        # 优雅停止
+        if self.proc.stdin:
+            try:
+                self.proc.stdin.write(b"q\n")
+                self.proc.stdin.flush()
+            except:
+                pass
+        time.sleep(1)
+        # 强制停止
+        if self.proc.poll() is None:
+            self.proc.terminate()
+            time.sleep(0.5)
+        if self.proc.poll() is None:
+            self.proc.kill()
