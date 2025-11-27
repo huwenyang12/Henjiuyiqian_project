@@ -5,7 +5,6 @@ from db import main as insert_db
 
 
 @Utils.retry
-@Utils.task_log
 def run_query():
     recorder = Utils.start_recorder()
     obj = Browser()
@@ -13,10 +12,14 @@ def run_query():
         obj.login()
         obj.goto_query()
         return obj.run_queries()
+    except Exception as e:
+        # 调用异常截图
+        pass
     finally:
-        obj.close()
         Utils.stop_recorder(recorder)
-
+        obj.close()
+        
+@Utils.task_log
 def main():
     for item in run_query():
         insert_db(**item)

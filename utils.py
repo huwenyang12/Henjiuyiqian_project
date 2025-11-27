@@ -230,18 +230,18 @@ class Utils:
             logger.info(f"{bar}【{action}】开始{bar}")
             start = time.time()
             try:
-                result = func(*args, **kwargs)
-                cost = round(time.time() - start, 2)
-                logger.info(f"{bar}【{action}】结束（耗时 {cost}s）{bar}")
-                return result
+                return func(*args, **kwargs)
             except Exception as e:
                 logger.error(f"{bar}【{action}】失败：{e}{bar}")
                 raise
+            finally:
+                cost = round(time.time() - start, 2)
+                logger.info(f"{bar}【{action}】结束（耗时 {cost}s）】{bar}")
         return wrapper
+
     
     @staticmethod
     def start_recorder():
-        # 视频保存目录
         video_dir = CONFIG["system"]["video"]
         os.makedirs(video_dir, exist_ok=True)
         ts = datetime.now().strftime("%Y%m%d%H%M%S")
@@ -252,8 +252,5 @@ class Utils:
 
     @staticmethod
     def stop_recorder(recorder):
-        """
-        停止录屏
-        """
         if recorder:
             recorder.stop()
