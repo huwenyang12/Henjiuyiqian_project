@@ -83,7 +83,7 @@ class UI:
         raise Exception(f"[safe_click] 点击失败：无法找到元素 {locator}，累计尝试 {retry} 次")
 
     @staticmethod
-    def wait_loading(locator, timeout=60, interval=3):
+    def wait_loading(locator, timeout=60, interval=5):
         """
         每秒检查一次控件是否还存在
         - timeout：最大检测时间

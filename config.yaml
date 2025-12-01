@@ -9,3 +9,10 @@ system:
 login:
   username: "15210385806"
   password: "lwp12345678"
+
+# 飞书
+feishu:
+  app_id: "cli_a9a3f1fddbf85cbd"
+  app_secret: "y7Oai1UMDi27loppGTC2LgN41rhHGBnP"
+  webhook: "https://open.feishu.cn/open-apis/bot/v2/hook/your_webhook"
+
