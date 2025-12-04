@@ -39,8 +39,8 @@ def insert_db(params):
     while True:
         if retry_times < 0:
             raise Exception("入库失败，已重试3次")
-        conn = MySQLdb.connect("localhost", "root", "root", "bt_console", cursorclass = cors.DictCursor)
-        # conn = MySQLdb.connect("rm-2zetkwh4s22am33a0lo.mysql.rds.aliyuncs.com", "esznkj", "esznkj20231027@", "yongyou_data", cursorclass = cors.DictCursor)
+        # conn = MySQLdb.connect("localhost", "root", "root", "bt_console", cursorclass = cors.DictCursor)
+        conn = MySQLdb.connect("rm-2zetkwh4s22am33a0lo.mysql.rds.aliyuncs.com", "esznkj", "esznkj20231027@", "yongyou_data", cursorclass = cors.DictCursor)
         cur = conn.cursor()
 
         try:            
@@ -70,8 +70,8 @@ def remove_repeat_days_db(query_days):
         while True:
             if retry_times < 0:
                 raise Exception("删除重复数据失败，已重试3次")
-            conn = MySQLdb.connect("localhost", "root", "root", "bt_console", cursorclass = cors.DictCursor)
-            # conn = MySQLdb.connect("rm-2zetkwh4s22am33a0lo.mysql.rds.aliyuncs.com", "esznkj", "esznkj20231027@", "yongyou_data", cursorclass = cors.DictCursor)
+            # conn = MySQLdb.connect("localhost", "root", "root", "bt_console", cursorclass = cors.DictCursor)
+            conn = MySQLdb.connect("rm-2zetkwh4s22am33a0lo.mysql.rds.aliyuncs.com", "esznkj", "esznkj20231027@", "yongyou_data", cursorclass = cors.DictCursor)
             cur = conn.cursor()
             query_sql = 'select * from yongyou_data where year = %s and month = %s and day = %s limit 1'%(query_year, query_month, query_day)
             sql = 'delete from yongyou_data where year = %s and month = %s and day = %s '%(query_year, query_month, query_day)

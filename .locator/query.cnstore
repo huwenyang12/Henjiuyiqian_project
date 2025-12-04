@@ -2483,6 +2483,568 @@
 					}
 				]
 			}
+		},
+		{
+			"id": "e1e4533e-ced8-4020-8002-38b0b4c6f74f",
+			"name": "凭证状态_临时",
+			"filePath": "5ba36451-4a8a-41f0-bd4d-680bf6fa6f9b.jpg",
+			"content": {
+				"automationType": "Chrome",
+				"processName": {
+					"value": "chrome"
+				},
+				"filePath": {
+					"value": "chrome.exe"
+				},
+				"version": {
+					"value": "1.3"
+				},
+				"childControls": [
+					{
+						"identifier": {
+							"role": {
+								"value": "window"
+							},
+							"title": {
+								"value": "北京很久以前餐饮管理有限公司"
+							},
+							"url": {
+								"value": "https://c1.yonyoucloud.com/",
+								"excluded": true
+							},
+							"className": {
+								"value": "Chrome_WidgetWin_1"
+							},
+							"controlMetaType": "Tab"
+						},
+						"childControls": [
+							{
+								"identifier": {
+									"tag": {
+										"value": "SPAN"
+									},
+									"class": {
+										"value": "wui-checkbox-label",
+										"excluded": true
+									},
+									"ancestorId": {
+										"value": "f863b523-7690-4cfc-9f37-c0e926c05ce4",
+										"excluded": true
+									},
+									"ancestorClass": {
+										"value": "wui-checkbox wui-checkbox-primary intelliv-checkbox",
+										"excluded": true
+									},
+									"isLeaf": {
+										"value": "1",
+										"excluded": true
+									},
+									"cssSelector": {
+										"value": "body>div>div>div>div>div>div>div>div>div>div>div>section>section>main>div>div>div>div>div>div>div>div>div>div>div>div>div>div>div>div>label>span",
+										"excluded": true
+									},
+									"sInfo": {
+										"value": "临时",
+										"excluded": true
+									},
+									"tableRow": {
+										"value": "-1",
+										"excluded": true
+									},
+									"tableCol": {
+										"value": "-1",
+										"excluded": true
+									},
+									"title": {
+										"value": "临时"
+									},
+									"controlMetaType": "Web",
+									"index": {
+										"value": "2",
+										"excluded": false
+									}
+								},
+								"childControls": [],
+								"excluded": false
+							}
+						],
+						"excluded": false
+					}
+				],
+				"parameters": {
+					"excluded": true,
+					"operator": "equals",
+					"value": ""
+				}
+			}
+		},
+		{
+			"id": "e9c8c7bd-3f89-4abb-adfc-7ceab4670c38",
+			"name": "凭证状态_保存",
+			"filePath": "f87043dc-fea3-44e4-9c77-fe82468f2b3d.jpg",
+			"content": {
+				"automationType": "Chrome",
+				"processName": {
+					"value": "chrome"
+				},
+				"filePath": {
+					"value": "chrome.exe"
+				},
+				"version": {
+					"value": "1.3"
+				},
+				"childControls": [
+					{
+						"identifier": {
+							"role": {
+								"value": "window"
+							},
+							"title": {
+								"value": "北京很久以前餐饮管理有限公司"
+							},
+							"url": {
+								"value": "https://c1.yonyoucloud.com/",
+								"excluded": true
+							},
+							"className": {
+								"value": "Chrome_WidgetWin_1"
+							},
+							"controlMetaType": "Tab"
+						},
+						"childControls": [
+							{
+								"identifier": {
+									"tag": {
+										"value": "SPAN"
+									},
+									"class": {
+										"value": "wui-checkbox-label",
+										"excluded": true
+									},
+									"ancestorId": {
+										"value": "f863b523-7690-4cfc-9f37-c0e926c05ce4",
+										"excluded": true
+									},
+									"ancestorClass": {
+										"value": "wui-checkbox is-checked wui-checkbox-primary intelliv-checkbox",
+										"excluded": true
+									},
+									"isLeaf": {
+										"value": "1",
+										"excluded": true
+									},
+									"cssSelector": {
+										"value": "body>div>div>div>div>div>div>div>div>div>div>div>section>section>main>div>div>div>div>div>div>div>div>div>div>div>div>div>div>div>div>label>span",
+										"excluded": true
+									},
+									"sInfo": {
+										"value": "保存",
+										"excluded": true
+									},
+									"tableRow": {
+										"value": "-1",
+										"excluded": true
+									},
+									"tableCol": {
+										"value": "-1",
+										"excluded": true
+									},
+									"title": {
+										"value": "保存"
+									},
+									"controlMetaType": "Web",
+									"index": {
+										"value": "2",
+										"excluded": false
+									}
+								},
+								"childControls": [],
+								"excluded": false
+							}
+						],
+						"excluded": false
+					}
+				],
+				"parameters": {
+					"excluded": true,
+					"operator": "equals",
+					"value": ""
+				}
+			}
+		},
+		{
+			"id": "c733a23c-fcde-4d99-979b-e089ba7ed83d",
+			"name": "凭证状态_审核",
+			"filePath": "a794e1e2-a9ff-4144-9ca6-dcab922047f9.jpg",
+			"content": {
+				"automationType": "Chrome",
+				"processName": {
+					"value": "chrome"
+				},
+				"filePath": {
+					"value": "chrome.exe"
+				},
+				"version": {
+					"value": "1.3"
+				},
+				"childControls": [
+					{
+						"identifier": {
+							"role": {
+								"value": "window"
+							},
+							"title": {
+								"value": "北京很久以前餐饮管理有限公司"
+							},
+							"url": {
+								"value": "https://c1.yonyoucloud.com/",
+								"excluded": true
+							},
+							"className": {
+								"value": "Chrome_WidgetWin_1"
+							},
+							"controlMetaType": "Tab"
+						},
+						"childControls": [
+							{
+								"identifier": {
+									"tag": {
+										"value": "SPAN"
+									},
+									"class": {
+										"value": "wui-checkbox-label",
+										"excluded": true
+									},
+									"ancestorId": {
+										"value": "f863b523-7690-4cfc-9f37-c0e926c05ce4",
+										"excluded": true
+									},
+									"ancestorClass": {
+										"value": "wui-checkbox wui-checkbox-primary intelliv-checkbox",
+										"excluded": true
+									},
+									"isLeaf": {
+										"value": "1",
+										"excluded": true
+									},
+									"cssSelector": {
+										"value": "body>div>div>div>div>div>div>div>div>div>div>div>section>section>main>div>div>div>div>div>div>div>div>div>div>div>div>div>div>div>div>label>span",
+										"excluded": true
+									},
+									"sInfo": {
+										"value": "审核"
+									},
+									"tableRow": {
+										"value": "-1",
+										"excluded": true
+									},
+									"tableCol": {
+										"value": "-1",
+										"excluded": true
+									},
+									"title": {
+										"value": "审核"
+									},
+									"controlMetaType": "Web",
+									"index": {
+										"value": "2",
+										"excluded": false
+									}
+								},
+								"childControls": [],
+								"excluded": false
+							}
+						],
+						"excluded": false
+					}
+				],
+				"parameters": {
+					"excluded": true,
+					"operator": "equals",
+					"value": ""
+				}
+			}
+		},
+		{
+			"id": "1d10f8fd-8bd1-4c73-8d6c-c2236d13a47d",
+			"name": "凭证状态_暂存",
+			"filePath": "8bb1ce72-20b9-4e98-b8f9-7c41c833f70c.jpg",
+			"content": {
+				"automationType": "Chrome",
+				"processName": {
+					"value": "chrome"
+				},
+				"filePath": {
+					"value": "chrome.exe"
+				},
+				"version": {
+					"value": "1.3"
+				},
+				"childControls": [
+					{
+						"identifier": {
+							"role": {
+								"value": "window"
+							},
+							"title": {
+								"value": "北京很久以前餐饮管理有限公司"
+							},
+							"url": {
+								"value": "https://c1.yonyoucloud.com/",
+								"excluded": true
+							},
+							"className": {
+								"value": "Chrome_WidgetWin_1"
+							},
+							"controlMetaType": "Tab"
+						},
+						"childControls": [
+							{
+								"identifier": {
+									"tag": {
+										"value": "SPAN"
+									},
+									"class": {
+										"value": "wui-checkbox-label",
+										"excluded": true
+									},
+									"ancestorId": {
+										"value": "f863b523-7690-4cfc-9f37-c0e926c05ce4",
+										"excluded": true
+									},
+									"ancestorClass": {
+										"value": "wui-checkbox wui-checkbox-primary intelliv-checkbox",
+										"excluded": true
+									},
+									"isLeaf": {
+										"value": "1",
+										"excluded": true
+									},
+									"cssSelector": {
+										"value": "body>div>div>div>div>div>div>div>div>div>div>div>section>section>main>div>div>div>div>div>div>div>div>div>div>div>div>div>div>div>div>label>span",
+										"excluded": true
+									},
+									"sInfo": {
+										"value": "暂存",
+										"excluded": true
+									},
+									"tableRow": {
+										"value": "-1",
+										"excluded": true
+									},
+									"tableCol": {
+										"value": "-1",
+										"excluded": true
+									},
+									"title": {
+										"value": "暂存"
+									},
+									"controlMetaType": "Web",
+									"index": {
+										"value": "2",
+										"excluded": false
+									}
+								},
+								"childControls": [],
+								"excluded": false
+							}
+						],
+						"excluded": false
+					}
+				],
+				"parameters": {
+					"excluded": true,
+					"operator": "equals",
+					"value": ""
+				}
+			}
+		},
+		{
+			"id": "f817e4b0-b135-416f-8615-99e6003b73a7",
+			"name": "凭证状态_记账",
+			"filePath": "40a77093-3a10-477f-bbed-a1498da6912e.jpg",
+			"content": {
+				"automationType": "Chrome",
+				"processName": {
+					"value": "chrome"
+				},
+				"filePath": {
+					"value": "chrome.exe"
+				},
+				"version": {
+					"value": "1.3"
+				},
+				"childControls": [
+					{
+						"identifier": {
+							"role": {
+								"value": "window"
+							},
+							"title": {
+								"value": "北京很久以前餐饮管理有限公司"
+							},
+							"url": {
+								"value": "https://c1.yonyoucloud.com/",
+								"excluded": true
+							},
+							"className": {
+								"value": "Chrome_WidgetWin_1"
+							},
+							"controlMetaType": "Tab"
+						},
+						"childControls": [
+							{
+								"identifier": {
+									"tag": {
+										"value": "SPAN"
+									},
+									"class": {
+										"value": "wui-checkbox-label",
+										"excluded": true
+									},
+									"ancestorId": {
+										"value": "f863b523-7690-4cfc-9f37-c0e926c05ce4",
+										"excluded": true
+									},
+									"ancestorClass": {
+										"value": "wui-checkbox wui-checkbox-primary intelliv-checkbox",
+										"excluded": true
+									},
+									"isLeaf": {
+										"value": "1",
+										"excluded": true
+									},
+									"cssSelector": {
+										"value": "body>div>div>div>div>div>div>div>div>div>div>div>section>section>main>div>div>div>div>div>div>div>div>div>div>div>div>div>div>div>div>label>span",
+										"excluded": true
+									},
+									"sInfo": {
+										"value": "记账"
+									},
+									"tableRow": {
+										"value": "-1",
+										"excluded": true
+									},
+									"tableCol": {
+										"value": "-1",
+										"excluded": true
+									},
+									"title": {
+										"value": "记账"
+									},
+									"controlMetaType": "Web",
+									"index": {
+										"value": "2",
+										"excluded": false
+									}
+								},
+								"childControls": [],
+								"excluded": false
+							}
+						],
+						"excluded": false
+					}
+				],
+				"parameters": {
+					"excluded": true,
+					"operator": "equals",
+					"value": ""
+				}
+			}
+		},
+		{
+			"id": "95dcc8bb-d578-4b3c-8d6c-504edfe92ca2",
+			"name": "凭证状态_错误",
+			"filePath": "eb5ab7b5-d35d-444b-9ff0-18781707286c.jpg",
+			"content": {
+				"automationType": "Chrome",
+				"processName": {
+					"value": "chrome"
+				},
+				"filePath": {
+					"value": "chrome.exe"
+				},
+				"version": {
+					"value": "1.3"
+				},
+				"childControls": [
+					{
+						"identifier": {
+							"role": {
+								"value": "window"
+							},
+							"title": {
+								"value": "北京很久以前餐饮管理有限公司"
+							},
+							"url": {
+								"value": "https://c1.yonyoucloud.com/",
+								"excluded": true
+							},
+							"className": {
+								"value": "Chrome_WidgetWin_1"
+							},
+							"controlMetaType": "Tab"
+						},
+						"childControls": [
+							{
+								"identifier": {
+									"tag": {
+										"value": "SPAN"
+									},
+									"class": {
+										"value": "wui-checkbox-label",
+										"excluded": true
+									},
+									"ancestorId": {
+										"value": "f863b523-7690-4cfc-9f37-c0e926c05ce4",
+										"excluded": true
+									},
+									"ancestorClass": {
+										"value": "wui-checkbox wui-checkbox-primary intelliv-checkbox",
+										"excluded": true
+									},
+									"isLeaf": {
+										"value": "1",
+										"excluded": true
+									},
+									"cssSelector": {
+										"value": "body>div>div>div>div>div>div>div>div>div>div>div>section>section>main>div>div>div>div>div>div>div>div>div>div>div>div>div>div>div>div>label>span",
+										"excluded": true
+									},
+									"sInfo": {
+										"value": "错误",
+										"excluded": true
+									},
+									"tableRow": {
+										"value": "-1",
+										"excluded": true
+									},
+									"tableCol": {
+										"value": "-1",
+										"excluded": true
+									},
+									"title": {
+										"value": "错误"
+									},
+									"controlMetaType": "Web",
+									"index": {
+										"value": "2",
+										"excluded": false
+									}
+								},
+								"childControls": [],
+								"excluded": false
+							}
+						],
+						"excluded": false
+					}
+				],
+				"parameters": {
+					"excluded": true,
+					"operator": "equals",
+					"value": ""
+				}
+			}
 		}
 	]
 }

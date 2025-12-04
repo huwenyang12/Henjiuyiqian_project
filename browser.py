@@ -127,6 +127,8 @@ class Browser:
             self.fill_date_range(start_date, end_date)
             logger.info("正在筛选会计科目...")
             self.select_subjects()
+            logger.info("正在勾选凭证状态...")
+            self.select_status()
             logger.info("正在选择币种...")
             self.select_currency()
             logger.info("正在提交查询...")
@@ -157,7 +159,13 @@ class Browser:
         UI.safe_input(locator.query.会计科目_编码名称1, "主营业务收入")
         UI.safe_input(locator.query.会计科目_编码名称2, "以前年度损益调整")
         cc.send_hotkey("{ENTER}")
-        time.sleep(0.5)
+
+    def select_status(self):
+        UI.safe_click(locator.query.凭证状态_临时)
+        UI.safe_click(locator.query.凭证状态_暂存)
+        UI.safe_click(locator.query.凭证状态_错误)
+        UI.safe_click(locator.query.凭证状态_审核)
+        UI.safe_click(locator.query.凭证状态_记账)
         UI.safe_click(locator.query.span_显示对方科目)
         UI.safe_click(locator.query.span_全景查询)
 
