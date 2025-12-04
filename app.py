@@ -4,6 +4,7 @@ from utils import Utils
 from db import main as insert_db
 
 
+
 @Utils.retry
 def run_query():
     recorder = Utils.start_recorder()
