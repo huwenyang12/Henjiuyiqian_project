@@ -148,7 +148,7 @@ class UI:
         raise Exception(f"[click_and_wait] 多次点击后目标控件仍未出现：{appear_locator}")
     
     @staticmethod
-    def file_ready(path, retry=5, sleep=1):
+    def file_ready(path, retry=20, sleep=1):
         """
         检查文件是否存在/可读（用于下载/导出后）
         """

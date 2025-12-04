@@ -104,7 +104,7 @@ def main(data_folder, download_time, start_date, end_date):
         download_time = datetime.strptime(download_time, '%Y%m%d%H%M%S')
         create_date = download_time.strftime("%Y%m%d")
         data_files = os.listdir(data_folder)
-        # FeiShu().send_message(f"文件需要录入数量为{len(data_files)}")
+        FeiShu().send_message(f"文件需要录入数量为{len(data_files)}")
         for data_file in data_files:
             f_file = os.path.join(data_folder, data_file)
             if 'part' not in data_file:
@@ -116,7 +116,7 @@ def main(data_folder, download_time, start_date, end_date):
             
             batch = len(df) // 1000 + 1
             logger.info(f"文件: {f_file}, 开始分 {batch} 批次录入...")
-            # FeiShu().send_message(f"文件: {f_file}, 开始分 {batch} 批次录入...")
+            FeiShu().send_message(f"文件: {f_file}, 开始分 {batch} 批次录入...")
             for index in range(batch):
                 
                 start_row = index * 1000
@@ -155,9 +155,9 @@ def main(data_folder, download_time, start_date, end_date):
                     params.append((uuid.uuid4().hex, create_date, datetime.now(), download_time, main_account, year, month, day, voucher_no, entry_no, summary, subject_code, subject_name, additional, currency, debit_original, debit_local, credit_original, credit_local, subject_fee, verification_info, bill_info, inner_trade_info, maker, reviewer, accounter, signer ))
                 insert_db(params)
                 logger.info(f"第{start_row + start_row_index}行到第{end_row + start_row_index - 1}行录入完成")
-        # FeiShu().send_message(f"录入数据库完成")
+        FeiShu().send_message(f"录入数据库完成")
     except:
-        # FeiShu().send_message(f"入库失败，{traceback.format_exc()}")
+        FeiShu().send_message(f"入库失败，{traceback.format_exc()}")
         pass
 
 if __name__ == "__main__":
@@ -167,9 +167,9 @@ if __name__ == "__main__":
     # start_date = sys.argv[3]
     # end_date = sys.argv[4]
     download_time = '20251126120000' # %Y%m%d%H%M%S
-    datafolder = r"D:\qcyq\很久以前\20251126101538"
+    datafolder = r"D:\qcyq\很久以前\Files\20251201134858"
     start_date = "2025-11-01"     
-    end_date   = "2025-11-30"
+    end_date   = "2025-12-01"
     logger.info("开始入库...")
     main(datafolder, download_time, start_date, end_date)
     logger.info("入库完成")
