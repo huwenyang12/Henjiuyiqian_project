@@ -4,7 +4,6 @@ from utils import Utils
 from db import main as insert_db
 
 
-
 @Utils.retry
 def run_query():
     recorder = Utils.start_recorder()
@@ -26,9 +25,20 @@ def main():
     if not results:
         logger.info("没有数据需要入库")
         return
-    item = results[0]
-    insert_db(**item)
+
+    # 合并两段的删除范围
+    data_folder = results[0]["data_folder"]
+    start_date = min(r["start_date"] for r in results)
+    end_date   = max(r["end_date"] for r in results)
+
+    insert_db(
+        data_folder=data_folder,
+        download_time=results[0]["download_time"],
+        start_date=start_date,
+        end_date=end_date,
+    )
     logger.info("所有 Excel 已入库完成")
+
 
 
 if __name__ == "__main__":

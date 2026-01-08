@@ -199,26 +199,71 @@ class Utils:
         except:
             pass
 
+    # @staticmethod
+    # def split_date_range():
+    #     """
+    #     返回日期区间列表：
+    #     - 开始日期不能早于 2025-11-01
+    #     - 不跨年：[(start, end)]
+    #     - 跨年：[(start, 当年12-31), (次年1-01, end)]
+    #     """
+    #     today = datetime.today().date()
+    #     raw_start = today - timedelta(days=60)
+    #     # 固定禁止查询的最小日期
+    #     min_start = datetime(2025, 11, 1).date()
+    #     start_date = max(raw_start, min_start)
+    #     end_date = today
+    #     if start_date.year == end_date.year:
+    #         return [(start_date, end_date)]
+    #     # 跨年（2025-11-11 ~ 2026-01-10：[(2025-11-11, 2025-12-31), (2026-01-01, 2026-01-10)]
+    #     first_end = datetime(start_date.year, 12, 31).date()
+    #     second_start = datetime(end_date.year, 1, 1).date()
+    #     return [(start_date, first_end),(second_start, end_date)]
+
     @staticmethod
     def split_date_range():
         """
-        返回日期区间列表：
-        - 开始日期不能早于 2025-11-01
-        - 不跨年：[(start, end)]
-        - 跨年：[(start, 当年12-31), (次年1-01, end)]
+        - 先取最近60天（但不早于 2025-11-01）
+        - 默认平均拆 3 段
+        - 若拆出来的某段跨年，则该段再按 12-31/01-01 额外拆开
         """
         today = datetime.today().date()
         raw_start = today - timedelta(days=60)
-        # 固定禁止查询的最小日期
         min_start = datetime(2025, 11, 1).date()
         start_date = max(raw_start, min_start)
         end_date = today
-        if start_date.year == end_date.year:
-            return [(start_date, end_date)]
-        # 跨年（2025-11-11 ~ 2026-01-10：[(2025-11-11, 2025-12-31), (2026-01-01, 2026-01-10)]
-        first_end = datetime(start_date.year, 12, 31).date()
-        second_start = datetime(end_date.year, 1, 1).date()
-        return [(start_date, first_end),(second_start, end_date)]
+        def split_n(s, e, n=3):
+            """把 [s,e]（含首尾）尽量均分成 n 段"""
+            total = (e - s).days + 1  # inclusive
+            if total <= 1 or n <= 1:
+                return [(s, e)]
+            base = total // n
+            rem = total % n  # 前 rem 段多 1 天
+            ranges = []
+            cur = s
+            for i in range(n):
+                seg_days = base + (1 if i < rem else 0)
+                if seg_days <= 0:
+                    continue
+                seg_end = cur + timedelta(days=seg_days - 1)
+                ranges.append((cur, seg_end))
+                cur = seg_end + timedelta(days=1)
+            return ranges
+        def split_cross_year(s, e):
+            """把跨年段按年界拆开"""
+            first_end = datetime(s.year, 12, 31).date()
+            second_start = datetime(e.year, 1, 1).date()
+            return [(s, first_end), (second_start, e)]
+        # 默认先拆 3 段
+        ranges = split_n(start_date, end_date, n=3)
+        # 某段跨年再额外拆一下
+        final = []
+        for s, e in ranges:
+            if s.year != e.year:
+                final.extend(split_cross_year(s, e))
+            else:
+                final.append((s, e))
+        return final
     
     @staticmethod
     def task_log(func):

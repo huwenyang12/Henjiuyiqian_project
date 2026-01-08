@@ -101,12 +101,15 @@ def main(data_folder, download_time, start_date, end_date):
         month_dict, query_days = get_year(start_date, end_date)
         remove_repeat_days_db(query_days)
 
-        download_time = datetime.strptime(download_time, '%Y%m%d%H%M%S')
-        create_date = download_time.strftime("%Y%m%d")
+        # download_time = datetime.strptime(download_time, '%Y%m%d%H%M%S')
+        # create_date = download_time.strftime("%Y%m%d")
         data_files = os.listdir(data_folder)
         FeiShu().send_message(f"文件需要录入数量为{len(data_files)}")
         for data_file in data_files:
             f_file = os.path.join(data_folder, data_file)
+            file_dt = datetime.strptime(os.path.splitext(data_file)[0], "%Y%m%d%H%M%S")
+            create_date = file_dt.strftime("%Y%m%d")
+            download_time_dt = file_dt
             if 'part' not in data_file:
                 df = pd.read_excel(f_file, skiprows=13, dtype=str)
                 start_row_index = 16
@@ -152,7 +155,7 @@ def main(data_folder, download_time, start_date, end_date):
                     bill_info = ""
                     inner_trade_info = ""
                     signer = ""
-                    params.append((uuid.uuid4().hex, create_date, datetime.now(), download_time, main_account, year, month, day, voucher_no, entry_no, summary, subject_code, subject_name, additional, currency, debit_original, debit_local, credit_original, credit_local, subject_fee, verification_info, bill_info, inner_trade_info, maker, reviewer, accounter, signer ))
+                    params.append((uuid.uuid4().hex, create_date, datetime.now(), download_time_dt, main_account, year, month, day, voucher_no, entry_no, summary, subject_code, subject_name, additional, currency, debit_original, debit_local, credit_original, credit_local, subject_fee, verification_info, bill_info, inner_trade_info, maker, reviewer, accounter, signer ))
                 insert_db(params)
                 logger.info(f"第{start_row + start_row_index}行到第{end_row + start_row_index - 1}行录入完成")
         FeiShu().send_message(f"录入数据库完成")
