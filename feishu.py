@@ -54,16 +54,16 @@ class FeiShu(object):
     def send_feishu_message(self, url, message):
         payload_message = {
             "msg_type": "text",
-            "content": {
-                "text": message
-            }
+            "content": {"text": message}
         }
-        headers = {
-            'Content-Type': 'application/json'
-        }
+        headers = {'Content-Type': 'application/json'}
 
-        response = requests.request("POST", url, headers=headers, data=json.dumps(payload_message))
-        return response
+        try:
+            # 加 timeout，避免无限卡住
+            return requests.post(url=url, data=json.dumps(payload_message), headers=headers, timeout=(3, 8))
+        except Exception:
+            # 飞书失败只记日志，不抛出去
+            return None
 
     def send_message(self, message):
         return self.send_feishu_message(self.webhook_url, message)

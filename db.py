@@ -11,6 +11,7 @@ import warnings
 from feishu import FeiShu
 import traceback
 from log import logger
+from utils import Utils
 
 
 warnings.filterwarnings('ignore')
@@ -103,7 +104,7 @@ def main(data_folder, download_time, start_date, end_date):
         month_dict, query_days = get_year(start_date, end_date)
         remove_repeat_days_db(query_days)
         data_files = os.listdir(data_folder)
-        FeiShu().send_message(f"文件需要录入数量为 {len(data_files)}")
+        Utils.safe_feishu(f"文件需要录入数量为 {len(data_files)}")
         seen = set()
         total_insert = 0
         total_skip = 0
@@ -118,7 +119,7 @@ def main(data_folder, download_time, start_date, end_date):
                 start_row_index = 3
             batch = len(df) // 1000 + 1
             logger.info(f"文件: {f_file}, 开始分 {batch} 批次录入...")
-            FeiShu().send_message(f"文件: {data_file}, 开始分 {batch} 批次录入...")
+            Utils.safe_feishu(f"文件: {data_file}, 开始分 {batch} 批次录入...")
 
             for index in range(batch):
                 start_row = index * 1000
@@ -175,13 +176,11 @@ def main(data_folder, download_time, start_date, end_date):
 
                 logger.info(f"批次 {index+1}/{batch} 完成：插入 {len(params)}，跳过重复 {skip_this_batch}")
 
-        # FeiShu().send_message(f"录入数据库完成：插入 {total_insert} 条，跳过重复 {total_skip} 条")
-        FeiShu().send_message(f"录入数据库完成")
+        # Utils.safe_feishue(f"录入数据库完成：插入 {total_insert} 条，跳过重复 {total_skip} 条")
+        Utils.safe_feishu(f"录入数据库完成")
 
     except:
-        FeiShu().send_message(f"入库失败，{traceback.format_exc()}")
-        pass
-
+        Utils.safe_feishu(f"入库失败，{traceback.format_exc()}")
 
 
 if __name__ == "__main__":

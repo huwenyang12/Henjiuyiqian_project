@@ -6,6 +6,7 @@ from datetime import datetime, timedelta
 from log import logger
 from recorder_impl import Recorder
 from PIL import ImageGrab
+from feishu import FeiShu
 
 CONFIG_FILE = os.path.join(os.path.dirname(__file__), "config.yaml")
 with open(CONFIG_FILE, "r", encoding="utf-8") as f:
@@ -164,6 +165,13 @@ class UI:
 
     
 class Utils:
+    @staticmethod
+    def safe_feishu(msg):
+        try:
+            FeiShu().send_message(msg)
+        except Exception:
+            logger.warning("飞书通知失败：%s", msg)
+
     @staticmethod
     def retry(func):
         """
