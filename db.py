@@ -48,7 +48,8 @@ def insert_db(params):
             cur.executemany(sql, params)  
             conn.commit()
             break
-        except Exception as e:  
+        except Exception as e:
+            retry_times -= 1
             logger.error("插入失败，" + traceback.format_exc())
             conn.rollback()
         finally:
@@ -85,6 +86,7 @@ def remove_repeat_days_db(query_days):
                 conn.commit()
                 break
             except Exception as e:  
+                retry_times -= 1
                 logger.error("删除重复数据失败，" + traceback.format_exc())
                 conn.rollback()
             finally:
@@ -100,68 +102,87 @@ def main(data_folder, download_time, start_date, end_date):
     try:
         month_dict, query_days = get_year(start_date, end_date)
         remove_repeat_days_db(query_days)
-
-        # download_time = datetime.strptime(download_time, '%Y%m%d%H%M%S')
-        # create_date = download_time.strftime("%Y%m%d")
         data_files = os.listdir(data_folder)
-        FeiShu().send_message(f"文件需要录入数量为{len(data_files)}")
+        FeiShu().send_message(f"文件需要录入数量为 {len(data_files)}")
+        seen = set()
+        total_insert = 0
+        total_skip = 0
+
         for data_file in data_files:
             f_file = os.path.join(data_folder, data_file)
-            file_dt = datetime.strptime(os.path.splitext(data_file)[0], "%Y%m%d%H%M%S")
-            create_date = file_dt.strftime("%Y%m%d")
-            download_time_dt = file_dt
             if 'part' not in data_file:
                 df = pd.read_excel(f_file, skiprows=13, dtype=str)
                 start_row_index = 16
             else:
                 df = pd.read_excel(f_file, skiprows=1, dtype=str)
                 start_row_index = 3
-            
             batch = len(df) // 1000 + 1
             logger.info(f"文件: {f_file}, 开始分 {batch} 批次录入...")
-            FeiShu().send_message(f"文件: {f_file}, 开始分 {batch} 批次录入...")
+            FeiShu().send_message(f"文件: {data_file}, 开始分 {batch} 批次录入...")
+
             for index in range(batch):
-                
                 start_row = index * 1000
-                end_row = index * 1000 + 1000 if index * 1000 + 1000 < len(df) else len(df)
-                count = end_row - start_row
-                if count == 0:
+                end_row = min(index * 1000 + 1000, len(df))
+                if end_row - start_row == 0:
                     break
-                select_df = df[start_row:end_row]
-                print(f"开始录入第{start_row + start_row_index}行到第{end_row + start_row_index - 1}行...")
+                select_df = df.iloc[start_row:end_row]
                 params = []
-                for row_index, row in select_df.iterrows():
-                    if pd.isnull(row[0]):
+                skip_this_batch = 0
+                for _, row in select_df.iterrows():
+                    if pd.isnull(row.iloc[0]):
                         continue
-                    main_account = "" if pd.isnull(row[2]) else row[2]
-                    bill_date = row[4]  # '2025-11-01'
-                    year, month, day = bill_date.split("-")
-                    voucher_no = "" if pd.isnull(row[5]) else row[5]
-                    entry_no = "" if pd.isnull(row[6]) else row[6]
-                    summary = "" if pd.isnull(row[7]) else row[7]
-                    subject_code = "" if pd.isnull(row[8]) else row[8]
-                    subject_name = "" if pd.isnull(row[9]) else row[9]
-                    additional = "" if pd.isnull(row[53]) else row[53]
-                    currency = "" if pd.isnull(row[55]) else row[55]
-                    debit_original = float(row[59]) if not pd.isnull(row[59]) else 0.0
-                    debit_local    = float(row[60]) if not pd.isnull(row[60]) else 0.0
-                    credit_original = float(row[62]) if not pd.isnull(row[62]) else 0.0
-                    credit_local    = float(row[63]) if not pd.isnull(row[63]) else 0.0
-                    maker = "" if pd.isnull(row[65]) else row[65]
-                    reviewer = "" if pd.isnull(row[66]) else row[66]
-                    accounter = "" if pd.isnull(row[67]) else row[67]
-                    subject_fee = ""
-                    verification_info = ""
-                    bill_info = ""
-                    inner_trade_info = ""
-                    signer = ""
-                    params.append((uuid.uuid4().hex, create_date, datetime.now(), download_time_dt, main_account, year, month, day, voucher_no, entry_no, summary, subject_code, subject_name, additional, currency, debit_original, debit_local, credit_original, credit_local, subject_fee, verification_info, bill_info, inner_trade_info, maker, reviewer, accounter, signer ))
-                insert_db(params)
-                logger.info(f"第{start_row + start_row_index}行到第{end_row + start_row_index - 1}行录入完成")
+
+                    main_account = "" if pd.isnull(row.iloc[2]) else str(row.iloc[2]).strip()
+                    bill_date = "" if pd.isnull(row.iloc[4]) else str(row.iloc[4]).strip()
+                    voucher_no = "" if pd.isnull(row.iloc[5]) else str(row.iloc[5]).strip()
+                    entry_no = "" if pd.isnull(row.iloc[6]) else str(row.iloc[6]).strip()
+                    summary = "" if pd.isnull(row.iloc[7]) else str(row.iloc[7]).strip()
+                    subject_code = "" if pd.isnull(row.iloc[8]) else str(row.iloc[8]).strip()
+                    subject_name = "" if pd.isnull(row.iloc[9]) else str(row.iloc[9]).strip()
+
+                    debit_local  = 0.0 if pd.isnull(row.iloc[60]) else float(row.iloc[60])
+                    credit_local = 0.0 if pd.isnull(row.iloc[63]) else float(row.iloc[63])
+                    unique_key = (bill_date, voucher_no, entry_no, subject_code,
+                                  debit_local, credit_local, main_account, summary)
+                    if unique_key in seen:
+                        skip_this_batch += 1
+                        continue
+                    seen.add(unique_key)
+
+                    year, month, day = bill_date.split("-") if bill_date and "-" in bill_date else ("", "", "")
+
+                    additional = "" if pd.isnull(row.iloc[53]) else str(row.iloc[53]).strip()
+                    currency   = "" if pd.isnull(row.iloc[55]) else str(row.iloc[55]).strip()
+                    debit_original  = 0.0 if pd.isnull(row.iloc[59]) else float(row.iloc[59])
+                    credit_original = 0.0 if pd.isnull(row.iloc[62]) else float(row.iloc[62])
+                    maker = "" if pd.isnull(row.iloc[65]) else str(row.iloc[65]).strip()
+                    reviewer = "" if pd.isnull(row.iloc[66]) else str(row.iloc[66]).strip()
+                    accounter = "" if pd.isnull(row.iloc[67]) else str(row.iloc[67]).strip()
+
+                    file_dt = datetime.strptime(os.path.splitext(data_file)[0], "%Y%m%d%H%M%S")
+                    create_date = file_dt.strftime("%Y%m%d")
+                    download_time_dt = file_dt
+                    params.append((
+                        uuid.uuid4().hex, create_date, datetime.now(), download_time_dt, main_account,
+                        year, month, day, voucher_no, entry_no, summary, subject_code, subject_name,
+                        additional, currency, debit_original, debit_local, credit_original, credit_local,
+                        "", "", "", "", maker, reviewer, accounter, ""
+                    ))
+                if params:
+                    insert_db(params)
+                    total_insert += len(params)
+                total_skip += skip_this_batch
+
+                logger.info(f"批次 {index+1}/{batch} 完成：插入 {len(params)}，跳过重复 {skip_this_batch}")
+
+        # FeiShu().send_message(f"录入数据库完成：插入 {total_insert} 条，跳过重复 {total_skip} 条")
         FeiShu().send_message(f"录入数据库完成")
+
     except:
         FeiShu().send_message(f"入库失败，{traceback.format_exc()}")
         pass
+
+
 
 if __name__ == "__main__":
     

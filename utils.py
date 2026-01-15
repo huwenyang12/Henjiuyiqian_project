@@ -228,9 +228,16 @@ class Utils:
         - 若拆出来的某段跨年，则该段再按 12-31/01-01 额外拆开
         """
         today = datetime.today().date()
+
+        # # 补跑日期，从十一月一号开始
+        # min_start = datetime(2025, 11, 1).date()
+        # start_date = min_start 
+        
+        # 正常跑最近60天且不超过2025.11.1
         raw_start = today - timedelta(days=60)
         min_start = datetime(2025, 11, 1).date()
         start_date = max(raw_start, min_start)
+
         end_date = today
         def split_n(s, e, n=3):
             """把 [s,e]（含首尾）尽量均分成 n 段"""
